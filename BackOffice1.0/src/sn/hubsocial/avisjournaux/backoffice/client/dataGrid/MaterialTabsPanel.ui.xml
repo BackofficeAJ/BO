@@ -1,0 +1,27 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:m="urn:import:gwt.material.design.client.ui">
+	
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+	
+		<m:MaterialTabs ui:field="tab2" color="red darken-3" textColor="white" indicatorColor="black" waves="yellow">
+			<m:tab><g:Label text="Annonce"/></m:tab>
+			<m:tab><g:Label text="Structure"/></m:tab>
+			<m:tab><g:Label text="Avis"/></m:tab>
+			<m:content>
+				<g:HTMLPanel ui:field="content"  />
+			</m:content>
+			<m:content>
+				<g:HTMLPanel ui:field="content1"  />
+			</m:content>
+			<m:content>
+					<g:HTMLPanel ui:field="content2"  />
+			</m:content>
+		</m:MaterialTabs>
+		
+	</g:HTMLPanel>
+</ui:UiBinder> 

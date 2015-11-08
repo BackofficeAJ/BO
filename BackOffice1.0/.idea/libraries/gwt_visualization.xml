@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="gwt-visualization">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Desktop/Material/gwt-material-master/target/classes/gwt/material/design/client/resources/gwt-visualization.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

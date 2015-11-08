@@ -1,0 +1,46 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:m="urn:import:gwt.material.design.client.ui">
+	
+		
+	<ui:style>
+		
+		.table{
+			width: 100%;
+		}
+		.panelPager{
+			display: inline-block;
+		}
+		.grid{
+			padding: 10px;
+		}
+		.headerItems{
+			padding: 20px 20px 0px 20px;
+		}
+		.headerItems i{
+			opacity: 0.71;
+			cursor: pointer;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+		
+	
+		<m:MaterialRow>
+		    <m:MaterialButton ui:field="btnSource" text="Source"  color="blue" waves="light"/>
+		</m:MaterialRow>
+		<m:MaterialRow addStyleNames="card">
+		    
+		    <m:MaterialRow>
+		        <m:MaterialLabel text="Android Users" fontSize="1.5" addStyleNames="{style.headerItems} left"/>
+		        <m:MaterialIcon tooltip="Action 1" color="black" icon="mdi-action-explore" size="small" addStyleNames="{style.headerItems} right"/>	
+		        <m:MaterialIcon tooltip="Action 2" color="black" icon="mdi-navigation-apps" size="small" addStyleNames="{style.headerItems} right"/>
+		        <m:MaterialIcon tooltip="Action 3" color="black" icon="mdi-social-whatshot" size="small" addStyleNames="{style.headerItems} right"/>
+		   		<m:MaterialTextBox placeholder="Search" icon="mdi-action-search" addStyleNames="right"/>
+		    </m:MaterialRow>
+		    <g:SimplePanel ui:field="gridPanel"  height="500px"/>
+			<g:SimplePanel ui:field="pagerPanel" addStyleNames="{style.panelPager}"/>
+		</m:MaterialRow>
+		
+	</g:HTMLPanel>
+</ui:UiBinder> 
