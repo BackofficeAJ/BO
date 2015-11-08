@@ -1,0 +1,54 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:p='urn:import:com.vaadin.polymer.paper.widget'
+         xmlns:ui="urn:ui:com.google.gwt.uibinder"
+		 xmlns:g="urn:import:com.google.gwt.user.client.ui"
+		 xmlns:m="urn:import:gwt.material.design.client.ui" >
+	
+	
+	
+<ui:style>
+</ui:style>
+
+
+	<g:HTMLPanel>
+		<style is='custom-style'>
+			
+<!-- coloriage du panel -->
+				.medium-tall{
+		    		--paper-toolbar-background:white;
+		    	}	
+			
+<!-- dimensionner le logo -->  
+			  .logo{
+			  	height: 110%;
+			  	 width: 20%;
+			  	 padding-top: 25px;
+			  	 margin-top: 15px; 
+			  	 margin-left: 30px;
+			  }
+	  		
+		
+		</style>
+		 <div main="">
+             <p:PaperHeaderPanel >     	
+                <p:PaperToolbar addStyleNames="medium-tall" >     
+                     <img class="logo" src="logo.jpg" />                 
+                </p:PaperToolbar>              
+               
+             </p:PaperHeaderPanel> 
+             
+             <!-- <m:MaterialNavBar  color="white" logoUrl="logo.jpg">
+			<m:nav><m:MaterialLink  icon="mdi-action-dashboard" textColor="blue"  /></m:nav>
+			<m:nav><m:MaterialLink   icon="mdi-action-delete"  textColor="blue" /></m:nav>
+			<m:nav><m:MaterialLink   icon="mdi-action-settings-ethernet" textColor="blue"/></m:nav>
+			<m:nav><m:MaterialLink   icon="mdi-navigation-more-vert"  textColor="blue"/></m:nav>
+				</m:MaterialNavBar>-->
+             
+             
+             <g:HTMLPanel ui:field="content" />
+           </div> 
+	
+	
+	</g:HTMLPanel>
+
+</ui:UiBinder> 

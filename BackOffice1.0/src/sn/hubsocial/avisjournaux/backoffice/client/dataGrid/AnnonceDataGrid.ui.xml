@@ -1,0 +1,51 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:m="urn:import:gwt.material.design.client.ui" >
+	
+
+	<ui:style>
+		
+		.table{
+			width: 100%;
+		}
+		.panelPager{
+			display: inline-block;
+		}
+		.grid{
+			padding: 10px;
+		}
+		.headerItems{
+			padding: 20px 20px 0px 20px;
+		}
+		.headerItems i{
+			opacity: 0.71;
+			cursor: pointer;
+		}
+		header {
+		padding-left: 500px;
+
+	} 
+	</ui:style>
+	<g:HTMLPanel>
+		<style is='custom-style'>
+
+		</style>
+		
+		<m:MaterialRow addStyleNames="card">
+		
+			<m:MaterialRow>
+		        <m:MaterialLabel text=" Gestion des ANNONCES" fontSize="1.5" addStyleNames="{style.headerItems} left"/>
+		         <m:MaterialIcon tooltip="Rechercher" color="black" icon="mdi-action-search" size="small" addStyleNames="{style.headerItems} right"/>
+		        <m:MaterialTextBox placeholder="Search" addStyleNames="right"/>
+		    </m:MaterialRow>  
+		    
+		    <m:MaterialRow>	
+		    		<g:SimplePanel ui:field="gridPanel" />	
+		    		<g:SimplePanel ui:field="pagerPanel" addStyleNames="{style.panelPager} right"/>
+		    </m:MaterialRow>
+		    		
+		</m:MaterialRow>
+		
+	</g:HTMLPanel>
+</ui:UiBinder> 
