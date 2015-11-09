@@ -36,7 +36,7 @@
 		
 			<m:MaterialRow>
 		        <m:MaterialLabel text=" Gestion des ANNONCES" fontSize="1.5" addStyleNames="{style.headerItems} left"/>
-		         <m:MaterialIcon tooltip="Rechercher" color="black" icon="mdi-action-search" size="small" addStyleNames="{style.headerItems} right"/>
+		         <m:MaterialIcon tooltip="Rechercher" icon="mdi-action-search" size="small" addStyleNames="{style.headerItems} right"/>
 		        <m:MaterialTextBox placeholder="Search" addStyleNames="right"/>
 		    </m:MaterialRow>  
 		    

@@ -7,8 +7,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-import sn.hubsocial.avisjournaux.backoffice.client.Index.IndexUiBinder;
-import sn.hubsocial.avisjournaux.backoffice.client.dataGrid.MaterialTabsPanel;
+import sn.hubsocial.avisjournaux.backoffice.client.dataGrid.AccueilTabsPanel;
 
 public class Index extends Composite {
 
@@ -22,7 +21,7 @@ private static IndexUiBinder uiBinder = GWT.create(IndexUiBinder.class);
 
 	public Index() {
 		initWidget(uiBinder.createAndBindUi(this));
-		MaterialTabsPanel menuBarr = new MaterialTabsPanel(); 
+		AccueilTabsPanel menuBarr = new AccueilTabsPanel(); 
 		content.add(menuBarr);
 	}
 

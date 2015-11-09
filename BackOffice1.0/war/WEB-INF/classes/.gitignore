@@ -1,3 +1,14 @@
 /META-INF/
 /log4j.properties
 /sn/
+/war/
+/.project
+/.settings/
+/BackOffice1.0.iml
+/BackOffice1_0.html.launch
+/New_configuration (1).launch
+/gwt-unitCache/
+/out/
+/.classpath
+/.gwt/
+/.idea/

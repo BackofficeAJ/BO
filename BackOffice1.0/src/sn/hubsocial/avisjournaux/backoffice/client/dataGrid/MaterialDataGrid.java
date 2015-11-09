@@ -2,7 +2,6 @@ package sn.hubsocial.avisjournaux.backoffice.client.dataGrid;
 
 import gwt.material.design.client.custom.MaterialButtonCell;
 import gwt.material.design.client.custom.MaterialCheckBoxCell;
-import gwt.material.design.client.custom.MaterialImageCell;
 import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialImage;
 import gwt.material.design.client.ui.MaterialToast;

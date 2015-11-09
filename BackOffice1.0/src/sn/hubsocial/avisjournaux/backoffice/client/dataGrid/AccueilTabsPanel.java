@@ -1,5 +1,6 @@
 package sn.hubsocial.avisjournaux.backoffice.client.dataGrid;
 
+
 import gwt.material.design.client.ui.MaterialTabs;
 
 import com.google.gwt.core.client.GWT;
@@ -9,18 +10,18 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class MaterialTabsPanel extends Composite {
+public class AccueilTabsPanel extends Composite {
 
 	private static MaterialTabsPanelUiBinder uiBinder = GWT.create(MaterialTabsPanelUiBinder.class);
 	
 	@UiField HTMLPanel content, content1, content2;
 
-	interface MaterialTabsPanelUiBinder extends UiBinder<Widget, MaterialTabsPanel> {
+	interface MaterialTabsPanelUiBinder extends UiBinder<Widget, AccueilTabsPanel> {
 	}
 
 	@UiField MaterialTabs tab2;
 	
-	public MaterialTabsPanel() {
+	public AccueilTabsPanel() {
 		initWidget(uiBinder.createAndBindUi(this));
 		
 		
@@ -30,7 +31,7 @@ public class MaterialTabsPanel extends Composite {
 		content.add(panelAnnonce);
 		content1.add(panelStructure);
 		content2.add(panelAvis);
-		tab2.setTabIndex(2);
+		tab2.setTabIndex(3);
 	}
 
 }

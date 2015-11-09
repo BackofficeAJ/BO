@@ -13,7 +13,7 @@ import org.fusesource.restygwt.client.RestService;
 
 import sn.hubsocial.avisjournaux.backoffice.client.entities.Objet;
 
-public interface ObjetProxy extends   RestService{
+public interface ObjetProxy extends RestService{
 
 	@Path("/rest/objet")
 	@PUT

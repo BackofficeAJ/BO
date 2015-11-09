@@ -102,7 +102,7 @@ public class AnnonceDataGrid  extends Composite {
             	img.setWidth("40px");
             	img.setHeight("40px");
             	//SET IMAGE TO CIRCLE
-            	img.setType("circle");
+            	//img.setType("circle");
                 return img;
             }
             

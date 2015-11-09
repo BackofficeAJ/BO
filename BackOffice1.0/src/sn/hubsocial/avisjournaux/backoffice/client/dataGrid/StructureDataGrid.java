@@ -52,9 +52,9 @@ public class StructureDataGrid extends Composite {
 	
 @UiField SimplePanel gridPanel;
 	
-	@UiField MaterialTextBox nom;
-	@UiField MaterialTextBox numero;
-	@UiField MaterialTextBox email;
+//	@UiField MaterialTextBox nom;
+//	@UiField MaterialTextBox numero;
+//	@UiField MaterialTextBox email;
 	
 	@UiField MaterialLink listeCollaps;
 
@@ -143,7 +143,7 @@ public class StructureDataGrid extends Composite {
                 
                 MaterialButton mb = new MaterialButton("", "red", "light");
                 mb.setIcon("mdi-action-delete");                
-                mb.setType("floating");
+                //mb.setType("floating");
                 mb.getElement().getStyle().setProperty("display", "inline-flex");
                 return mb;
             }
@@ -157,7 +157,7 @@ public class StructureDataGrid extends Composite {
                 
                 MaterialButton mb = new MaterialButton("", "blue", "light");
                 mb.setIcon("mdi-editor-mode-edit");                
-                mb.setType("floating");
+             //   mb.setType("floating");
                 return mb;
             }
             
@@ -194,10 +194,10 @@ public class StructureDataGrid extends Composite {
 	//suppression de la structure
 				sortDataHandler.getList().remove(object);
 				
-	//remise des valeurs dans les champs du formulaire
-				nom.setText(nomM);
-				numero.setText(numeroM);
-				email.setText(emailM);
+//	//remise des valeurs dans les champs du formulaire
+//				nom.setText(nomM);
+//				numero.setText(numeroM);
+//				email.setText(emailM);
 				
 			}
 		});
@@ -230,27 +230,27 @@ public class StructureDataGrid extends Composite {
 	private void getAllOrderDTO() {
 		
 		//recuperation des valeurs saisies
-				String nomS = nom.getValue();
-				String numeroS = numero.getValue();
-				String emailS = email.getText();
+//				String nomS = nom.getValue();
+//				String numeroS = numero.getValue();
+//				String emailS = email.getText();
 				
 				
 		//controle de saisie
-				if ("".equals(nomS)) {
-					MaterialToast.alert("Saisir un Nom");	
-					
-					return;
-				}
+//				if ("".equals(nomS)) {
+//					MaterialToast.alert("Saisir un Nom");	
+//					
+//					return;
+				//}
 		//Ajout des valeurs 
-					orders.add(new StructureDTO( nomS , numeroS , emailS ));
+				//	orders.add(new StructureDTO( nomS , numeroS , emailS ));
 					ModelStructureProvider.setList(orders);
 					sortDataHandler.setList(ModelStructureProvider.getList());
 					MaterialToast.alert("Ajout avec succes!!!");
 				
 		//remise a zero
-					nom.setText("");
-					numero.setText("");
-					email.setText("");
+//					nom.setText("");
+//					numero.setText("");
+//					email.setText("");
 				
 	}
 	public StructureDTO getModelStructure() {
@@ -260,10 +260,10 @@ public class StructureDataGrid extends Composite {
 	public void setModelStructure(StructureDTO ModelStructure) {
 		this.ModelStructure = ModelStructure;
 	}
-	@UiHandler("submit")
-    protected void onConfirmAddButtonClick(ClickEvent e){
-		
-		refreshData();	
-		
-	}
+//	@UiHandler("submit")
+//    protected void onConfirmAddButtonClick(ClickEvent e){
+//		
+//		refreshData();	
+//		
+//	}
 }

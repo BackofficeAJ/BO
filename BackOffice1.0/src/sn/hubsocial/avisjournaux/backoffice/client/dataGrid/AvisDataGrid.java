@@ -1,13 +1,9 @@
 package sn.hubsocial.avisjournaux.backoffice.client.dataGrid;
 
-import gwt.material.design.client.custom.MaterialButtonCell;
 import gwt.material.design.client.custom.MaterialCheckBoxCell;
-import gwt.material.design.client.ui.MaterialButton;
-import gwt.material.design.client.ui.MaterialImage;
+import gwt.material.design.client.type.ModalType;
 import gwt.material.design.client.ui.MaterialLink;
-import gwt.material.design.client.ui.MaterialListBox;
-import gwt.material.design.client.ui.MaterialTextArea;
-import gwt.material.design.client.ui.MaterialTextBox;
+import gwt.material.design.client.ui.MaterialModal;
 import gwt.material.design.client.ui.MaterialToast;
 import sn.hubsocial.avisjournaux.backoffice.client.DTO.AvisDTO;
 
@@ -18,7 +14,6 @@ import java.util.List;
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.cell.client.SafeHtmlCell;
-import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.safehtml.shared.SafeHtml;
@@ -34,10 +29,7 @@ import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FileUpload;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.MultiSelectionModel;
@@ -75,18 +67,18 @@ public class AvisDataGrid extends Composite {
 
 	private AvisDTO OrderDTO;
 
-	@UiField SimplePanel gridPanel;
+	@UiField SimplePanel gridPanel, pagerPanel;
 	
-	@UiField MaterialListBox titre;
-	@UiField MaterialTextBox structure;
-	//@UiField VerticalPanel pdf;
-	FileUpload fichierpdf;
-	@UiField MaterialTextArea resume;	
-	@UiField MaterialListBox type;
-	//@UiField VerticalPanel image;
-	FileUpload fichierimage;
+//	@UiField MaterialListBox titre;
+//	@UiField MaterialTextBox structure;
+//	//@UiField VerticalPanel pdf;
+//	FileUpload fichierpdf;
+//	@UiField MaterialTextArea resume;	
+//	@UiField MaterialListBox type;
+//	//@UiField VerticalPanel image;
+//	FileUpload fichierimage;
 	
-	@UiField MaterialLink formulaireCollaps;
+	//@UiField MaterialLink formulaireCollaps;
 	@UiField MaterialLink listeCollaps;
 	
 	public AvisDataGrid() {
@@ -108,13 +100,13 @@ public class AvisDataGrid extends Composite {
 		//liste de choix
 		dataGrid.setStyleName("striped responsive-table");	
 		for (int i = 0; i < structtype.length; i++) {
-			type.addItem(structtype[i]);
+		//	type.addItem(structtype[i]);
 		}
 		
 		for (int i = 0; i < structtitre.length; i++) {
-			titre.addItem(structtitre[i]);
+	//		titre.addItem(structtitre[i]);
 		}		
-		titre.setValue(0, null);
+	//	titre.setValue(0, null);
 	
 	}
 
@@ -124,7 +116,7 @@ public class AvisDataGrid extends Composite {
 		refreshData();
 	}
 
-	private void refreshData() {
+	public void refreshData() {
 		/*orderDTOProvider.setList(new ArrayList<AvisDTO>());
 		getAllOrderDTO();*/
 		AvisDTO.retrieve(orderDTOProvider,sortDataHandler, 0, 10, "desc");
@@ -153,7 +145,8 @@ public class AvisDataGrid extends Composite {
             @Override
             public void update(int index, AvisDTO object, Boolean value) {
                 selectionModel.setSelected(object, value);
-                MaterialToast.alert("index"+index+"object"+object+"value"+value+"");
+                MaterialToast.alert("index"+index+" " +"value"+value+"");
+                MaterialToast.alert(""+object.getId());
             }
         };
         checkColumn.setFieldUpdater(checkColumnFU);
@@ -273,93 +266,93 @@ public class AvisDataGrid extends Composite {
     };*/
 
 		// ACTION BUTTON SUPPRIMER
-		Column<AvisDTO, MaterialButton> buttSupp = new Column<AvisDTO, MaterialButton>(new MaterialButtonCell()) {
-            @Override
-            public MaterialButton getValue(AvisDTO object) {
-                
-                MaterialButton mb = new MaterialButton("", "red", "light");
-                mb.setWidth("30px");
-                mb.setIconPosition("right");
-                mb.setIcon("mdi-action-delete");                
-                mb.setType("floating");
-               return mb;
-            }
-            
-        };
+//		Column<AvisDTO, MaterialButton> buttSupp = new Column<AvisDTO, MaterialButton>(new MaterialButtonCell()) {
+//            @Override
+//            public MaterialButton getValue(AvisDTO object) {
+//                
+//                MaterialButton mb = new MaterialButton("", "red", "light");
+//                mb.setWidth("30px");
+//                mb.setIconPosition("right");
+//                mb.setIcon("mdi-action-delete");                
+//               // mb.setType("floating");
+//               return mb;
+//            }
+//            
+//        };
         
      // ACTION BUTTON MODIFIER
-        Column<AvisDTO, MaterialButton > buttModif = new Column<AvisDTO, MaterialButton>(new MaterialButtonCell()) {
-            @Override
-            public MaterialButton getValue(AvisDTO object) {
-                
-                MaterialButton mb = new MaterialButton("", "blue", "light");
-                mb.setWidth("30px");
-                mb.setIconPosition("right");
-                mb.setIcon("mdi-editor-mode-edit");                
-                mb.setType("floating");
-                return mb;
-            }
-            
-        };
+//        Column<AvisDTO, MaterialButton > buttModif = new Column<AvisDTO, MaterialButton>(new MaterialButtonCell()) {
+//            @Override
+//            public MaterialButton getValue(AvisDTO object) {
+//                
+//                MaterialButton mb = new MaterialButton("", "blue", "light");
+//                mb.setWidth("30px");
+//                mb.setIconPosition("right");
+//                mb.setIcon("mdi-editor-mode-edit");                
+//               // mb.setType("floating");
+//                return mb;
+//            }
+//            
+//        };
         
-     // ACTION BUTTON AJOUTER MOT CLE
-        Column<AvisDTO, MaterialButton> buttCle = new Column<AvisDTO, MaterialButton>(new MaterialButtonCell()) {
-            @Override
-            public MaterialButton getValue(AvisDTO object) {
-                
-                MaterialButton mb = new MaterialButton("", "grey", "light");
-                mb.setWidth("30px");
-                mb.setIconPosition("right");
-                mb.setIcon("mdi-content-add-circle-outline");                
-                mb.setType("floating");
-                return mb;
-            }
-            
-        };
+//     // ACTION BUTTON AJOUTER MOT CLE
+//        Column<AvisDTO, MaterialButton> buttCle = new Column<AvisDTO, MaterialButton>(new MaterialButtonCell()) {
+//            @Override
+//            public MaterialButton getValue(AvisDTO object) {
+//                
+//                MaterialButton mb = new MaterialButton("", "grey", "light");
+//                mb.setWidth("30px");
+//                mb.setIconPosition("right");
+//                mb.setIcon("mdi-content-add-circle-outline");                
+//               // mb.setType("floating");
+//                return mb;
+//            }
+//            
+//        };
         
         
       //GESTION DE LA SUPPRESSION
-        buttSupp.setFieldUpdater(new FieldUpdater<AvisDTO, MaterialButton>() {			
-			@Override
-			public void update(int index, AvisDTO object, MaterialButton value) {
-				sortDataHandler.getList().remove(object);
-			}
-		});    
+//        buttSupp.setFieldUpdater(new FieldUpdater<AvisDTO, MaterialButton>() {			
+//			@Override
+//			public void update(int index, AvisDTO object, MaterialButton value) {
+//				sortDataHandler.getList().remove(object);
+//			}
+//		});    
 		
         
     //GESTION DE LA MODIFICATION
-        buttModif.setFieldUpdater(new FieldUpdater<AvisDTO, MaterialButton>() {
-			
-			@Override
-			public void update(int index, AvisDTO object, MaterialButton value) {
-				
+//        buttModif.setFieldUpdater(new FieldUpdater<AvisDTO, MaterialButton>() {
+//			
+//			@Override
+//			public void update(int index, AvisDTO object, MaterialButton value) {
+//				
 				
 	//recuperation des valeurs
-				
-				String titreM = object.getTitre();
-				String structureM = object.getStructure().getNom();
-				String resumeM = object.getResume();
-				String typeM = object.getQuotidien().getName();
-				
+//				
+//				String titreM = object.getTitre();
+//				String structureM = object.getStructure().getNom();
+//				String resumeM = object.getResume();
+//				String typeM = object.getQuotidien().getName();
+//				
 	//suppression de l'avis
-				sortDataHandler.getList().remove(object);
+//				sortDataHandler.getList().remove(object);
 				
 	//remise des valeurs dans les champs du formulaire
 				
-				structure.setText(structureM);
-				resume.setText(resumeM);
-				
-			}
-		});
-        
+//				structure.setText(structureM);
+//				resume.setText(resumeM);
+//				
+//			}
+//		});
+//        
         //
-        buttCle.setFieldUpdater(new FieldUpdater<AvisDTO, MaterialButton>() {
-			
-			@Override
-			public void update(int index, AvisDTO object, MaterialButton value) {
-				MaterialToast.alert("mot cle ajouté!!!!");
-			}
-		});
+//        buttCle.setFieldUpdater(new FieldUpdater<AvisDTO, MaterialButton>() {
+//			
+//			@Override
+//			public void update(int index, AvisDTO object, MaterialButton value) {
+//				MaterialToast.alert("mot cle ajouté!!!!");
+//			}
+//		});
 
 		final DataGrid<AvisDTO> dataGrid = new DataGrid<AvisDTO>(100, KEY_PROVIDER);
 		dataGrid.setSize("100%", "75vh");
@@ -372,18 +365,19 @@ public class AvisDataGrid extends Composite {
 		dataGrid.addColumn(colResume, "Resume");
 		dataGrid.addColumn(colType, "Type Quotidien");
 		//dataGrid.addColumn(image, "Image");
-		dataGrid.setColumnWidth(buttSupp, "45px");
-		dataGrid.addColumn(buttSupp);		
-		dataGrid.addColumn(buttModif);
-		dataGrid.setColumnWidth(buttModif, "45px");
-		dataGrid.addColumn(buttCle);
-		dataGrid.setColumnWidth(buttCle,"45px");		
+		//dataGrid.setColumnWidth(buttSupp, "45px");
+		//dataGrid.addColumn(buttSupp);		
+		//dataGrid.addColumn(buttModif);
+		//dataGrid.setColumnWidth(buttModif, "45px");
+		//dataGrid.addColumn(buttCle);
+		//dataGrid.setColumnWidth(buttCle,"45px");		
 
 		dataGrid.setStyleName("responsive-table");		
 
 		SimplePager.Resources pagerResources = GWT.create(SimplePager.Resources.class);
 		SimplePager pager = new SimplePager(TextLocation.CENTER, pagerResources, false, 0, true);
 		pager.setDisplay(dataGrid);
+		pagerPanel.add(pager);
 
 		orderDTOProvider = new ListDataProvider<AvisDTO>();
 		orderDTOProvider.addDataDisplay(dataGrid);
@@ -426,8 +420,8 @@ public class AvisDataGrid extends Composite {
 					MaterialToast.alert("Ajout avec succes!!!");
 				
 				//remise a zero
-					structure.setText("");
-					resume.setText("");
+				//	structure.setText("");
+				//	resume.setText("");
 				
 }
 
@@ -438,10 +432,13 @@ public class AvisDataGrid extends Composite {
 	public void setOrderDTO(AvisDTO OrderDTO) {
 		this.OrderDTO = OrderDTO;
 	}
-	@UiHandler("submit")
-    protected void onConfirmAddButtonClick(ClickEvent e){
-		
-		refreshData();	
-		
+//	@UiHandler("submit")
+//    protected void onConfirmAddButtonClick(ClickEvent e){
+//		
+//		refreshData();	
+//	}
+	@UiHandler("avisForm")
+    void onWindowModal(ClickEvent e) {
+        MaterialModal.showWindow(new AvisFormDataGrid(), ModalType.WINDOW, "Enregistrer un Avis","red",false);
 	}
 }

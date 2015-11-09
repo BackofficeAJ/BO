@@ -38,16 +38,14 @@
 			<m:MaterialRow>
 		        <m:MaterialLabel text=" Gestion des Structures" fontSize="1.5" addStyleNames="{style.headerItems} left"/> 
 		        
-		        <m:MaterialIcon tooltip="rechercher" color="black" icon="mdi-action-search" size="small" addStyleNames="{style.headerItems} right"/>
+		        <m:MaterialIcon tooltip="rechercher"  icon="mdi-action-search" size="small" addStyleNames="{style.headerItems} right"/>
 		        <m:MaterialTextBox placeholder="Search" addStyleNames="right"/>
 		    </m:MaterialRow>
-		    <m:MaterialCollapsible type="popout" wave="light" >   		
-					
-					<m:item>
-						<m:MaterialCollapsibleItem>
-							<m:header><m:MaterialLink ui:field="formulaireCollaps" text="Enregistrer une Structure" icon="mdi-content-add"  textColor="red"/></m:header>
-							 <m:content>
-								<m:MaterialPanel>
+		    <m:MaterialCollapsible type="POPOUT" >   		
+					<!-- <m:MaterialCollapsibleItem>
+						
+							<m:MaterialCollapsibleHeader><m:MaterialLink ui:field="formulaireCollaps" text="Enregistrer une Structure" icon="mdi-content-add"  textColor="red"/></m:MaterialCollapsibleHeader>
+							 <m:MaterialCollapsibleBody>
 									<m:MaterialTextBox  placeholder="Nom" ui:field="nom"/>
 									<m:MaterialTextBox placeholder="Numero" ui:field="numero" icon="mdi-editor-format-list-numbered"/>
 									 <m:MaterialTextBox type="email" ui:field="email" placeholder="Email" icon="mdi-action-account-circle"/>
@@ -55,19 +53,18 @@
 									 	 <br/><m:MaterialButton ui:field="submit" text="Ajouter" 
 									 	 	waves="light" size="large" icon="mdi-action-note-add" color="red" iconPosition="right"/>
 									 </div>
-								</m:MaterialPanel>
-							 </m:content>
-						</m:MaterialCollapsibleItem>
-					</m:item>
-					
-					<m:item >
-						<m:MaterialCollapsibleItem >
-							<m:header><m:MaterialLink ui:field="listeCollaps" text="Liste des Structures" icon="mdi-action-view-list" textColor=" red "/></m:header>
-						    <m:content>
+							</m:MaterialCollapsibleBody>
+						
+					</m:MaterialCollapsibleItem>
+					 -->
+					<m:MaterialCollapsibleItem>
+						
+							<m:MaterialCollapsibleHeader><m:MaterialLink ui:field="listeCollaps" text="Liste des Structures" icon="mdi-action-view-list" textColor=" red "/></m:MaterialCollapsibleHeader>
+						    <m:MaterialCollapsibleBody>
 						    	<g:SimplePanel ui:field="gridPanel" />								
-							</m:content>
-						</m:MaterialCollapsibleItem>						
-					</m:item>										
+							</m:MaterialCollapsibleBody>
+											
+					</m:MaterialCollapsibleItem>										
 				</m:MaterialCollapsible>			
 		</m:MaterialRow>
 		
