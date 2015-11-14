@@ -1,0 +1,22 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+						 xmlns:m="urn:import:gwt.material.design.client.ui">
+	<ui:style>
+		.btn{
+			width: 150px;
+		}
+	</ui:style>
+	<m:MaterialPanel>
+		<m:MaterialModalContent>
+			<m:MaterialListBox ui:field="titre" name="Title"/>
+			<m:MaterialAutoComplete ui:field="structure" placeholder="Structure" />
+			<m:MaterialTextArea placeholder="Resume" ui:field="resume"/>
+			<m:MaterialListBox ui:field="type"/>
+		</m:MaterialModalContent>
+		
+		<m:MaterialModalFooter align="RIGHT">
+			<m:MaterialButton ui:field="btnAgree" waves="GREEN" type="FLAT" text="Valider" addStyleNames="{style.btn}" />
+			<m:MaterialButton ui:field="btnDisagree" waves="RED" type="FLAT" text="Annuler" addStyleNames="{style.btn}" />
+		</m:MaterialModalFooter>
+	</m:MaterialPanel>
+</ui:UiBinder> 
