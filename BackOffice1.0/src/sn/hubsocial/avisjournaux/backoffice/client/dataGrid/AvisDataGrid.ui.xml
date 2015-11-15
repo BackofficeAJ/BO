@@ -37,20 +37,29 @@
 			<m:MaterialRow>
 		        <m:MaterialLabel text=" Gestion des AVIS" fontSize="1.5" addStyleNames="{style.headerItems} left"/>
 		        
-		        <m:MaterialIcon tooltip="Modifier" icon="mode_edit" size="small" addStyleNames="{style.headerItems} right"/>
+		        <!-- <m:MaterialIcon tooltip="Modifier" icon="mode_edit" size="small" addStyleNames="{style.headerItems} right"/>
 		        <m:MaterialIcon tooltip="Supprimer" icon="delete" size="small" addStyleNames="{style.headerItems} right"/>
-		        <m:MaterialIcon tooltip="Mots clés" icon="add_circle" size="small" addStyleNames="{style.headerItems} right"/>
-		        <!-- <m:MaterialIcon ui:field="addButton" tooltip="Ajouter Avis" icon="add_circle" size="small" addStyleNames="{style.headerItems} right"/> -->
+		        <m: MaterialIcon tooltip="Mots clés" icon="add_circle" size="small" addStyleNames="{style.headerItems} right"/>
+		         <m:MaterialIcon ui:field="addButton" tooltip="Ajouter Avis" icon="add_circle" size="small" addStyleNames="{style.headerItems} right"/> -->
+		        
+		        <m:MaterialIcon addStyleNames="{style.headerItems} right"/>
+		        <m:MaterialIcon icon="apps" tooltip="Menu" activates="dp-4" size="small" addStyleNames="{style.headerItems} right" />
+		        <m:MaterialDropDown name="dp-4" belowOrigin="false" constraintWidth="false">
+			        <m:MaterialLink ui:field="mots_cles" fontSize="0.7" text="Ajouter Mot clé" textColor="black" waves="default" icon="add_circle" size="small" separator="true"/>
+			        <m:MaterialLink ui:field="modifier" fontSize="0.7" text="Modifier Avis" textColor="black" waves="default" icon="mode_edit" size="small" separator="true"/>
+			        <m:MaterialLink ui:field="supprimer" fontSize="0.7" text="Supprimer Avis" textColor="black" waves="default" icon="delete" size="small" separator="true"/>
+			    </m:MaterialDropDown>
+		        <m:MaterialIcon ui:field="avisForm" tooltip="Ajouter Avis" icon="add_circle" textColor="red" size="small" addStyleNames="{style.headerItems} right"/>
 		        <m:MaterialTextBox placeholder="Search" addStyleNames="right"/>
-		        <m:MaterialIcon tooltip="Rechercher" icon="search" size="small" addStyleNames="{style.headerItems} right" /> 
+		        <m:MaterialIcon tooltip="Rechercher" icon="search" size="small" addStyleNames="{style.headerItems} right" />
 		        
 		    </m:MaterialRow>
 		    
-		   <m:MaterialFAB>
+		   <!-- <m:MaterialFAB>
 		     <m:MaterialButton icon="add" type="FLOATING" ui:field="avisForm" backgroundColor="red darken-3" waves="light" size="small" />     
-		   </m:MaterialFAB> 
+		   </m:MaterialFAB>  -->
 		    
-		    <m:MaterialCollapsible type="POPOUT" >   
+		    <!-- <m:MaterialCollapsible type="POPOUT" >   
 		    	
 		    		
 						<m:MaterialCollapsibleItem >
@@ -62,7 +71,7 @@
 					
 					
 					
-						<!-- <m:MaterialCollapsibleItem>
+						<m:MaterialCollapsibleItem>
 							<m:MaterialCollapsibleHeader><m:MaterialLink ui:field="formulaireCollaps" text="Enregistrer un AVIS" icon="mdi-content-add"  textColor="red"/></m:MaterialCollapsibleHeader>
 							 <m:MaterialCollapsibleBody>
 								
@@ -78,7 +87,7 @@
 									</div>
 								
 							 </m:MaterialCollapsibleBody>
-						</m:MaterialCollapsibleItem> -->
+						</m:MaterialCollapsibleItem>
 				
 					
 					
@@ -90,7 +99,12 @@
 							</m:MaterialCollapsibleBody>
 						</m:MaterialCollapsibleItem>						
 															
-				</m:MaterialCollapsible>			
+				</m:MaterialCollapsible>			 -->
+				<m:MaterialRow addStyleNames="card">
+					<g:SimplePanel ui:field="gridPanel"  />	
+					<g:SimplePanel ui:field="pagerPanel" addStyleNames="{style.panelPager} right"/>	
+				</m:MaterialRow>						
+							
 		</m:MaterialRow>
 		
 	</g:HTMLPanel>
