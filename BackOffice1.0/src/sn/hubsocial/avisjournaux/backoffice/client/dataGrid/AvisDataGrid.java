@@ -2,7 +2,6 @@ package sn.hubsocial.avisjournaux.backoffice.client.dataGrid;
 
 import gwt.material.design.client.custom.MaterialCheckBoxCell;
 import gwt.material.design.client.type.ModalType;
-import gwt.material.design.client.ui.MaterialLink;
 import gwt.material.design.client.ui.MaterialModal;
 import gwt.material.design.client.ui.MaterialToast;
 import sn.hubsocial.avisjournaux.backoffice.client.DTO.AvisDTO;
@@ -10,6 +9,8 @@ import sn.hubsocial.avisjournaux.backoffice.client.DTO.AvisDTO;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+import org.apache.jasper.tagplugins.jstl.core.Remove;
 
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
@@ -66,6 +67,9 @@ public class AvisDataGrid extends Composite {
 	private final SelectionModel<AvisDTO> selectionModel = new MultiSelectionModel<AvisDTO>(KEY_PROVIDER);
 
 	private AvisDTO OrderDTO;
+	ArrayList<Long> alID;
+	private long id;
+	int nbreSelection;
 
 	@UiField SimplePanel gridPanel, pagerPanel;
 	
@@ -79,35 +83,20 @@ public class AvisDataGrid extends Composite {
 //	FileUpload fichierimage;
 	
 	//@UiField MaterialLink formulaireCollaps;
-	@UiField MaterialLink listeCollaps;
+	//@UiField MaterialLink listeCollaps;
 	
 	public AvisDataGrid() {
 		
 		initWidget(uiBinder.createAndBindUi(this));
-	/*	fichierpdf = new FileUpload();
-		pdf.add(new HTML("PDF"));
-		pdf.add(fichierpdf);
-		
-		fichierimage = new FileUpload();
-		image.add(new HTML("IMAGE"));
-		image.add(fichierimage);	*/
-		
-		
-		listeCollaps.addStyleName("active");
 		setGrid();
+		alID = new ArrayList<Long>();
+		 
+		nbreSelection = 0;
 		
 
 		//liste de choix
-		dataGrid.setStyleName("striped responsive-table");	
-		for (int i = 0; i < structtype.length; i++) {
-		//	type.addItem(structtype[i]);
-		}
-		
-		for (int i = 0; i < structtitre.length; i++) {
-	//		titre.addItem(structtitre[i]);
-		}		
-	//	titre.setValue(0, null);
-	
+		//dataGrid.setStyleName("striped responsive-table");
+		dataGrid.setStyleName("bordered responsive-table");
 	}
 
 	private void setGrid() {
@@ -129,25 +118,47 @@ public class AvisDataGrid extends Composite {
 	private DataGrid<AvisDTO> createDatagrid() {
 
 		this.sortDataHandler = new ListHandler<AvisDTO>(new ArrayList<AvisDTO>());
+		
 		// CHECKBOX
-		final Column<AvisDTO, Boolean> checkColumn = new Column<AvisDTO, Boolean>(new MaterialCheckBoxCell()) {
-			@Override
-			public Boolean getValue(AvisDTO object) {
-				boolean value = selectionModel.isSelected(object);
-
-				return value;
-				
-			}
-		};
+				Column<AvisDTO, Boolean> checkColumn = new Column<AvisDTO, Boolean>(new MaterialCheckBoxCell()) {
+					@Override
+					public Boolean getValue(AvisDTO object) {
+						boolean value = selectionModel.isSelected(object);	
+						return value;
+					}
+				};
 		
 		FieldUpdater<AvisDTO, Boolean> checkColumnFU = new FieldUpdater<AvisDTO, Boolean>() {
 
             @Override
             public void update(int index, AvisDTO object, Boolean value) {
                 selectionModel.setSelected(object, value);
-                MaterialToast.alert("index"+index+" " +"value"+value+"");
-                MaterialToast.alert(""+object.getId());
+                id = +object.getId();
+                
+            	if (alID.contains(id)== true) {
+            		alID.remove(id);
+            		nbreSelection -=1;
+                    MaterialToast.alert(""+(nbreSelection));
+                    MaterialToast.alert("remove");
+				}
+            	else {
+					alID.add(id);
+					nbreSelection +=1;
+					MaterialToast.alert(""+(nbreSelection));
+                    MaterialToast.alert("ajoute");
+					
+				}
+//            	if (value == false) {
+//            		MaterialToast.alert(""+(value));
+//            		nbreSelection -=1;
+//                    MaterialToast.alert(""+(nbreSelection));
+//				}
+//                MaterialToast.alert("index"+index+" " +"value"+value+"");
+//                id = +object.getId();
+                
+               // MaterialToast.alert(""+id);
             }
+            
         };
         checkColumn.setFieldUpdater(checkColumnFU);
 
@@ -437,8 +448,23 @@ public class AvisDataGrid extends Composite {
 //		
 //		refreshData();	
 //	}
+//	popup pour enrigistrer un avis
 	@UiHandler("avisForm")
-    void onWindowModal(ClickEvent e) {
+    void onAvisEdit(ClickEvent e) {
         MaterialModal.showWindow(new AvisFormDataGrid(), ModalType.WINDOW, "Enregistrer un Avis","red",false);
 	}
+//	popup pour modifier un avis
+	@UiHandler("modifier")
+	 void onAvisModify(ClickEvent e) {
+        MaterialModal.showWindow(new AvisFormDataGrid(), ModalType.WINDOW, "Modifier un Avis","red",false);
+	}
+//	Ajouter mot cle
+//	@UiHandler("mots_cles")
+//	void onAddKeyWord(ClickEvent e){
+//		if (createDatagrid().c) {
+//			
+//		}
+//		
+//	}
+	
 }

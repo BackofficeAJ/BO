@@ -7,8 +7,7 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
-	
-		<m:MaterialTabs ui:field="tab2" color="red darken-3" textColor="white" indicatorColor="black" waves="yellow">
+		<m:MaterialTabs ui:field="tab2" color="red darken-3" textColor="white" indicatorColor="yellow" waves="yellow">
 			<m:tab><g:Label text="Annonce"/></m:tab>
 			<m:tab><g:Label text="Structure"/></m:tab>
 			<m:tab><g:Label text="Avis"/></m:tab>

@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.client.custom.MaterialSuggestionOracle;
 import gwt.material.design.client.ui.MaterialAutoComplete;
+import gwt.material.design.client.ui.MaterialDropDown;
 import gwt.material.design.client.ui.MaterialListBox;
 import gwt.material.design.client.ui.MaterialModal;
 import gwt.material.design.client.ui.MaterialTextArea;
@@ -39,6 +40,7 @@ public class AvisFormDataGrid extends Composite {
 		titre.setValue(0, null);
 		
 		structure.setSuggestions(getSuggestions());
+		//MaterialDropDown test = new MaterialDropDown(name, belowOrigin, constraintWidth)
 	}
 	  private MaterialSuggestionOracle getSuggestions() {
 	        MaterialSuggestionOracle suggestions = new MaterialSuggestionOracle(); suggestions.add("Alabama");
@@ -49,25 +51,7 @@ public class AvisFormDataGrid extends Composite {
 	        suggestions.add("Colorado");
 	        suggestions.add("Connecticut");
 	        suggestions.add("Delaware");
-	        suggestions.add("Florida");
-	        suggestions.add("Georgia");
-	        suggestions.add("Hawaii");
-	        suggestions.add("Idaho");
-	        suggestions.add("Illinois");
-	        suggestions.add("Indiana");
-	        suggestions.add("Iowa");
-	        suggestions.add("Kansas");
-	        suggestions.add("Kentucky");
-	        suggestions.add("Louisiana");
-	        suggestions.add("Maine");
-	        suggestions.add("Maryland");
-	        suggestions.add("Massachusetts");
-	        suggestions.add("Michigan");
-	        suggestions.add("Minnesota");
-	        suggestions.add("Mississippi");
-	        suggestions.add("Missouri");
-	        suggestions.add("Montana");
-	        suggestions.add("Louisiana");
+	        
 	        return suggestions;
 	    }
 	
