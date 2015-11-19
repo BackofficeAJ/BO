@@ -52,7 +52,41 @@ public class AvisDataGrid extends Composite {
 	 
 
 	private List<AvisDTO> orders = new ArrayList<AvisDTO>();
+	
+	private int page = 0;
+	private int offset = 10;
+	private String sortOrder = "desc";
+	public int getPage() {
+		return page;
+	}
 
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public int getOffset() {
+		return offset;
+	}
+
+	public void setOffset(int offset) {
+		this.offset = offset;
+	}
+
+	public ListDataProvider<AvisDTO> getOrderDTOProvider() {
+		return orderDTOProvider;
+	}
+
+	public void setOrderDTOProvider(ListDataProvider<AvisDTO> orderDTOProvider) {
+		this.orderDTOProvider = orderDTOProvider;
+	}
+
+	public ListHandler<AvisDTO> getSortDataHandler() {
+		return sortDataHandler;
+	}
+
+	public void setSortDataHandler(ListHandler<AvisDTO> sortDataHandler) {
+		this.sortDataHandler = sortDataHandler;
+	}
 	private DataGrid<AvisDTO> dataGrid;
 	private ListDataProvider<AvisDTO> orderDTOProvider;
 	private ListHandler<AvisDTO> sortDataHandler;
@@ -67,35 +101,17 @@ public class AvisDataGrid extends Composite {
 	private final SelectionModel<AvisDTO> selectionModel = new MultiSelectionModel<AvisDTO>(KEY_PROVIDER);
 
 	private AvisDTO OrderDTO;
-	ArrayList<Long> alID;
+	public ArrayList<Long> alID;
 	private long id;
-	int nbreSelection;
+	private int nbreSelection;
 
 	@UiField SimplePanel gridPanel, pagerPanel;
-	
-//	@UiField MaterialListBox titre;
-//	@UiField MaterialTextBox structure;
-//	//@UiField VerticalPanel pdf;
-//	FileUpload fichierpdf;
-//	@UiField MaterialTextArea resume;	
-//	@UiField MaterialListBox type;
-//	//@UiField VerticalPanel image;
-//	FileUpload fichierimage;
-	
-	//@UiField MaterialLink formulaireCollaps;
-	//@UiField MaterialLink listeCollaps;
 	
 	public AvisDataGrid() {
 		
 		initWidget(uiBinder.createAndBindUi(this));
 		setGrid();
-		alID = new ArrayList<Long>();
-		 
-		nbreSelection = 0;
-		
-
-		//liste de choix
-		//dataGrid.setStyleName("striped responsive-table");
+		alID = new ArrayList<Long>();		
 		dataGrid.setStyleName("bordered responsive-table");
 	}
 
@@ -106,13 +122,7 @@ public class AvisDataGrid extends Composite {
 	}
 
 	public void refreshData() {
-		/*orderDTOProvider.setList(new ArrayList<AvisDTO>());
-		getAllOrderDTO();*/
-		AvisDTO.retrieve(orderDTOProvider,sortDataHandler, 0, 10, "desc");
-
-
-		
-		
+		AvisDTO.retrieve(this);		
 	}
 
 	private DataGrid<AvisDTO> createDatagrid() {
@@ -148,15 +158,6 @@ public class AvisDataGrid extends Composite {
                     MaterialToast.alert("ajoute");
 					
 				}
-//            	if (value == false) {
-//            		MaterialToast.alert(""+(value));
-//            		nbreSelection -=1;
-//                    MaterialToast.alert(""+(nbreSelection));
-//				}
-//                MaterialToast.alert("index"+index+" " +"value"+value+"");
-//                id = +object.getId();
-                
-               // MaterialToast.alert(""+id);
             }
             
         };
@@ -166,8 +167,10 @@ public class AvisDataGrid extends Composite {
  		final TextColumn<AvisDTO> colTitre = new TextColumn<AvisDTO>() {
  			@Override
  			public String getValue(AvisDTO object) {
-
- 				return object.getTitre();
+ 				if (object.getTitre() != null) {
+ 					return object.getTitre();
+				}
+ 				return "";
  			}
  		};
  		colTitre.setSortable(true);
@@ -185,8 +188,12 @@ public class AvisDataGrid extends Composite {
 		Column<AvisDTO,String> colStructure = new Column<AvisDTO, String>(new EditTextCell()) {
 			@Override
 			public String getValue(AvisDTO object) {
-
-				return object.getStructure().getNom();
+				if (object.getStructure() != null) {
+					if (object.getStructure().getNom() != null) {
+						return object.getStructure().getNom();
+					}
+				}
+				return "";
 			}
 		};
 		colStructure.setSortable(true);
@@ -242,8 +249,13 @@ public class AvisDataGrid extends Composite {
 		TextColumn<AvisDTO> colType = new TextColumn<AvisDTO>() {
 			@Override
 			public String getValue(AvisDTO object) {
-
-				return object.getQuotidien().getName();
+				if (object.getQuotidien() != null) {
+					if (object.getQuotidien().getName() != null) {
+						return object.getQuotidien().getName();
+					}
+					
+				}
+				return "";
 			}
 		};
 		colType.setSortable(true);
@@ -276,94 +288,6 @@ public class AvisDataGrid extends Composite {
         
     };*/
 
-		// ACTION BUTTON SUPPRIMER
-//		Column<AvisDTO, MaterialButton> buttSupp = new Column<AvisDTO, MaterialButton>(new MaterialButtonCell()) {
-//            @Override
-//            public MaterialButton getValue(AvisDTO object) {
-//                
-//                MaterialButton mb = new MaterialButton("", "red", "light");
-//                mb.setWidth("30px");
-//                mb.setIconPosition("right");
-//                mb.setIcon("mdi-action-delete");                
-//               // mb.setType("floating");
-//               return mb;
-//            }
-//            
-//        };
-        
-     // ACTION BUTTON MODIFIER
-//        Column<AvisDTO, MaterialButton > buttModif = new Column<AvisDTO, MaterialButton>(new MaterialButtonCell()) {
-//            @Override
-//            public MaterialButton getValue(AvisDTO object) {
-//                
-//                MaterialButton mb = new MaterialButton("", "blue", "light");
-//                mb.setWidth("30px");
-//                mb.setIconPosition("right");
-//                mb.setIcon("mdi-editor-mode-edit");                
-//               // mb.setType("floating");
-//                return mb;
-//            }
-//            
-//        };
-        
-//     // ACTION BUTTON AJOUTER MOT CLE
-//        Column<AvisDTO, MaterialButton> buttCle = new Column<AvisDTO, MaterialButton>(new MaterialButtonCell()) {
-//            @Override
-//            public MaterialButton getValue(AvisDTO object) {
-//                
-//                MaterialButton mb = new MaterialButton("", "grey", "light");
-//                mb.setWidth("30px");
-//                mb.setIconPosition("right");
-//                mb.setIcon("mdi-content-add-circle-outline");                
-//               // mb.setType("floating");
-//                return mb;
-//            }
-//            
-//        };
-        
-        
-      //GESTION DE LA SUPPRESSION
-//        buttSupp.setFieldUpdater(new FieldUpdater<AvisDTO, MaterialButton>() {			
-//			@Override
-//			public void update(int index, AvisDTO object, MaterialButton value) {
-//				sortDataHandler.getList().remove(object);
-//			}
-//		});    
-		
-        
-    //GESTION DE LA MODIFICATION
-//        buttModif.setFieldUpdater(new FieldUpdater<AvisDTO, MaterialButton>() {
-//			
-//			@Override
-//			public void update(int index, AvisDTO object, MaterialButton value) {
-//				
-				
-	//recuperation des valeurs
-//				
-//				String titreM = object.getTitre();
-//				String structureM = object.getStructure().getNom();
-//				String resumeM = object.getResume();
-//				String typeM = object.getQuotidien().getName();
-//				
-	//suppression de l'avis
-//				sortDataHandler.getList().remove(object);
-				
-	//remise des valeurs dans les champs du formulaire
-				
-//				structure.setText(structureM);
-//				resume.setText(resumeM);
-//				
-//			}
-//		});
-//        
-        //
-//        buttCle.setFieldUpdater(new FieldUpdater<AvisDTO, MaterialButton>() {
-//			
-//			@Override
-//			public void update(int index, AvisDTO object, MaterialButton value) {
-//				MaterialToast.alert("mot cle ajouté!!!!");
-//			}
-//		});
 
 		final DataGrid<AvisDTO> dataGrid = new DataGrid<AvisDTO>(100, KEY_PROVIDER);
 		dataGrid.setSize("100%", "75vh");
@@ -375,13 +299,7 @@ public class AvisDataGrid extends Composite {
 		//dataGrid.addColumn(pdf, "Contenu");
 		dataGrid.addColumn(colResume, "Resume");
 		dataGrid.addColumn(colType, "Type Quotidien");
-		//dataGrid.addColumn(image, "Image");
-		//dataGrid.setColumnWidth(buttSupp, "45px");
-		//dataGrid.addColumn(buttSupp);		
-		//dataGrid.addColumn(buttModif);
-		//dataGrid.setColumnWidth(buttModif, "45px");
-		//dataGrid.addColumn(buttCle);
-		//dataGrid.setColumnWidth(buttCle,"45px");		
+		//dataGrid.addColumn(image, "Image");		
 
 		dataGrid.setStyleName("responsive-table");		
 
@@ -443,28 +361,42 @@ public class AvisDataGrid extends Composite {
 	public void setOrderDTO(AvisDTO OrderDTO) {
 		this.OrderDTO = OrderDTO;
 	}
-//	@UiHandler("submit")
-//    protected void onConfirmAddButtonClick(ClickEvent e){
-//		
-//		refreshData();	
-//	}
 //	popup pour enrigistrer un avis
 	@UiHandler("avisForm")
     void onAvisEdit(ClickEvent e) {
-        MaterialModal.showWindow(new AvisFormDataGrid(), ModalType.WINDOW, "Enregistrer un Avis","red",false);
+        MaterialModal.showWindow(new AvisFormDataGrid(this), ModalType.WINDOW, "Enregistrer un Avis","blue",false);
 	}
 //	popup pour modifier un avis
 	@UiHandler("modifier")
 	 void onAvisModify(ClickEvent e) {
-        MaterialModal.showWindow(new AvisFormDataGrid(), ModalType.WINDOW, "Modifier un Avis","red",false);
+		if (nbreSelection == 1) {
+//			mettre les requetes pour recuperer les données et les mettre dans les champs
+			MaterialModal.showWindow(new AvisFormDataGrid(), ModalType.WINDOW, "Modifier un Avis","blue",false);
+		}
+		MaterialToast.alert("veuillez selectionner un seuk Avis");
 	}
 //	Ajouter mot cle
-//	@UiHandler("mots_cles")
-//	void onAddKeyWord(ClickEvent e){
-//		if (createDatagrid().c) {
-//			
-//		}
-//		
-//	}
+	@UiHandler("mots_cles")
+	void onAddKeyWord(ClickEvent e){
+		if (nbreSelection == 1) {
+			MaterialModal.showWindow(new MotsClesDataGrid(), ModalType.WINDOW, "Ajout mots cles","blue",false);
+		}
+			MaterialToast.alert("veuillez selectionner un seuk Avis");
+		
+	}
+//	supprimer un Avis
+	@UiHandler("supprimer")
+	void onAvisDelete(ClickEvent e){
+//		mettre le requete pour supprimer l'avis de Id id recuperer dans le checkBox
+		MaterialToast.alert("Suppression");
+	}
+
+	public String getSortOrder() {
+		return sortOrder;
+	}
+
+	public void setSortOrder(String sortOrder) {
+		this.sortOrder = sortOrder;
+	}	
 	
 }
