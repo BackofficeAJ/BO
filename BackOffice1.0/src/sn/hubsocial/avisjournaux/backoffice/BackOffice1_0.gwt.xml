@@ -12,20 +12,16 @@
   <!-- Inherit the default GWT style sheet.  You can change       -->
   <!-- the theme of your GWT application by uncommenting          -->
   <!-- any one of the following lines.                            -->
-   <inherits name='com.google.gwt.user.theme.standard.Standard'/> 
+  <!-- <inherits name='com.google.gwt.user.theme.standard.Standard'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
-  <!-- <inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
- 
-<!-- <inherits name="gwt.material.design.themes.GwtMaterialThemeBlue"/> -->
+<inherits name='com.google.gwt.user.theme.standard.Standard' />
   <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
   <!-- Other module inherits   -->
   <inherits name="com.vaadin.polymer.Elements"/> 
-  <inherits name="gwt.material.design.GwtMaterialDesign" /> 
-
-  <!-- <inherits name="gwt.material.design.GwtMaterialDesignBasic" /> -->
+  <inherits name="gwt.material.design.GwtMaterialDesign" />
   
  <inherits name='org.fusesource.restygwt.RestyGWT'/>
 

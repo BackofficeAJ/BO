@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="test-classes" path="test"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry excluding="test/|src/" kind="src" path=""/>
+	<classpathentry kind="src" output="test-classes" path="test"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/vaadin-widgets-7.5.6.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/vaadin-gwt-polymer-elements-1.1.3.0-alpha1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/org.restlet.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/org.restlet.ext.gae.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/org.restlet.ext.gson.jar"/>
@@ -18,16 +18,13 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/joda-time-2.4.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/restygwt-2.0.3.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/javax.ws.rs-api-2.0-m16.jar"/>
-	<classpathentry kind="lib" path="C:/Users/tafaseck/Downloads/Documents/GWT/vaadin-gwt-polymer-elements-1.1.3.0-alpha1.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/vaadin-gwt-polymer-elements-1.1.3.0-alpha1.jar" sourcepath="C:/Users/tafaseck/.m2/repository/com/vaadin/polymer/vaadin-gwt-polymer-elements/1.1.3.0-alpha1/vaadin-gwt-polymer-elements-1.1.3.0-alpha1-sources.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-servlet.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/gwt-material"/>
-	<classpathentry kind="lib" path="C:/Users/tafaseck/Downloads/Documents/GWT/gwt-material-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/tafaseck/Downloads/Documents/GWT/gwt-material-1.3.3.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-material-1.4.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-material-1.3.3.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

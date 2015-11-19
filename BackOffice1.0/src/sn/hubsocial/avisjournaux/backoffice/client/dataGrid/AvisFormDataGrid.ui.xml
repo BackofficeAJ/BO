@@ -1,6 +1,6 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-						 xmlns:m="urn:import:gwt.material.design.client.ui">
+			 xmlns:m="urn:import:gwt.material.design.client.ui">
 	<ui:style>
 		.btn{
 			width: 150px;
@@ -9,7 +9,7 @@
 	<m:MaterialPanel>
 		<m:MaterialModalContent>
 			<m:MaterialListBox ui:field="titre" name="Title"/>
-			<m:MaterialAutoComplete ui:field="structure" placeholder="Structure" />
+			<m:MaterialAutoComplete disabled="false" ui:field="structure" placeholder="Structure" />
 			<m:MaterialTextArea placeholder="Resume" ui:field="resume"/>
 			<m:MaterialListBox ui:field="type"/>
 		</m:MaterialModalContent>

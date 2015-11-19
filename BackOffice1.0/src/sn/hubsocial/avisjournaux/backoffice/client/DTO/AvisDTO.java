@@ -1,5 +1,6 @@
 package sn.hubsocial.avisjournaux.backoffice.client.DTO;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +9,16 @@ import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONParser;
+import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.view.client.ListDataProvider;
 
 import sn.hubsocial.avisjournaux.backoffice.client.JSO.ObjetJSO;
+import sn.hubsocial.avisjournaux.backoffice.client.dataGrid.AvisDataGrid;
+import sn.hubsocial.avisjournaux.backoffice.client.dataGrid.Commons;
 import sn.hubsocial.avisjournaux.backoffice.client.entities.Objet;
 import sn.hubsocial.avisjournaux.backoffice.client.restlet.proxy.ObjetProxy;
 
@@ -183,13 +189,13 @@ public class AvisDTO implements Serializable {
 	}*/
 
 	
-	public static void retrieve (final ListDataProvider<AvisDTO> avisProvider, final ListHandler<AvisDTO>sortDataHandler, int page, int offset, String sortOrder){
+	public static void retrieve (final AvisDataGrid avisDataGrid){
 		
 		ObjetProxy objetProxy = GWT.create(ObjetProxy.class);
 		
 		
 		// Retrieve the contact
-		objetProxy.find("10", "0",new MethodCallback <List<Objet>>() {
+		objetProxy.find(avisDataGrid.getOffset()+"", avisDataGrid.getPage()+"",new MethodCallback <List<Objet>>() {
 		   
 
 			@Override
@@ -205,14 +211,42 @@ public class AvisDTO implements Serializable {
 			@Override
 			public void onSuccess(Method method, List<Objet> response) {
 				// TODO Auto-generated method stub
-				avisProvider.setList(new ArrayList<AvisDTO>());
+				avisDataGrid.getOrderDTOProvider().setList(new ArrayList<AvisDTO>());
 			      for (Objet obj : response){
 			    	  AvisDTO avisDTO = new AvisDTO(obj);
-			    	  avisProvider.getList().add(avisDTO);
+			    	  avisDataGrid.getOrderDTOProvider().getList().add(avisDTO);
 			      }
 			      
-			      sortDataHandler.setList(avisProvider.getList());
+			      avisDataGrid.getSortDataHandler().setList(avisDataGrid.getOrderDTOProvider().getList());
 				
+			}
+		});
+	}
+	
+	public static void save (Objet avis, final AvisDataGrid avisDataGrid){
+		
+		ObjetProxy objetProxy = GWT.create(ObjetProxy.class);
+		
+		
+		// Retrieve the contact
+		objetProxy.saveOrUpdate(avis,new MethodCallback <Objet>() {
+		   
+
+			@Override
+			public void onFailure(Method method, Throwable exception) {
+				// TODO Auto-generated method stub
+				String errormessage = exception.getMessage() + "\n";
+		    	for (StackTraceElement s : exception.getStackTrace()){
+		    		errormessage += s.getClassName() + " " +s.getMethodName() + " "+ s.getLineNumber()+ "\n" ;
+		    	}
+		    	Window.alert(errormessage);
+			}
+
+			@Override
+			public void onSuccess(Method method, Objet response) {
+				// TODO Auto-generated method stub
+				
+				retrieve(avisDataGrid);
 			}
 		});
 	}

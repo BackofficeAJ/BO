@@ -1,17 +1,10 @@
 package sn.hubsocial.avisjournaux.backoffice.server.resource;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ConcurrentMap;
-
-import org.restlet.Response;
 import org.restlet.data.Form;
-import org.restlet.data.Header;
-import org.restlet.data.Parameter;
-import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ServerResource;
 
@@ -45,13 +38,14 @@ public static Gson gson;
       gson = builder.create();
 	}
 	@Override
-	public Objet saveOrUpdate(Objet objet) {
-		ClientResource cr = new ClientResource(Commons.HTTP_REST_OBJECT);
-		try {
-			Representation rep = cr.get();
-			return (new Gson().fromJson(rep.getText(),  Objet.class));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+	public Objet saveOrUpdate(String objet) {
+		
+		try{
+			String json = Commons.send(new URL(Commons.HTTP_REST_OBJECT), "PUT", objet);
+			
+			//cr.get().getText();
+			return (Objet) (gson.fromJson(json, Objet.class));
+		}catch (Exception e){
 			e.printStackTrace();
 		}
 		return null;

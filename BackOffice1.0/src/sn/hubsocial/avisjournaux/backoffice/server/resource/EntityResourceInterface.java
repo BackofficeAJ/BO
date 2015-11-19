@@ -13,7 +13,7 @@ import sn.hubsocial.avisjournaux.backoffice.client.entities.Entity;
 
 public interface EntityResourceInterface<T extends Entity> {
 	@Put
-	public   T saveOrUpdate(T objet) ;
+	public   T saveOrUpdate(String objet) ;
 	@Get
 	public   List<T> find() ;
 	@Delete

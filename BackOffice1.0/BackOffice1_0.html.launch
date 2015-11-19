@@ -5,7 +5,6 @@
 <listAttribute key="com.google.gwt.eclipse.core.ENTRY_POINT_MODULES">
 <listEntry value="sn.hubsocial.avisjournaux.backoffice.BackOffice1_0"/>
 </listAttribute>
-<stringAttribute key="com.google.gwt.eclipse.core.LOG_LEVEL" value="ERROR"/>
 <booleanAttribute key="com.google.gwt.eclipse.core.SUPERDEVMODE_ENABLED" value="true"/>
 <stringAttribute key="com.google.gwt.eclipse.core.URL" value="BackOffice1_0.html"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
@@ -14,13 +13,9 @@
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="4"/>
 </listAttribute>
-<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
-<listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
-<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
-</listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="com.google.gdt.eclipse.suite.appengineClasspathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.google.gwt.dev.DevMode"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-superDevMode -remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -startupUrl BackOffice1_0.html -logLevel ERROR -codeServerPort 9997 -port 8888 -server com.google.appengine.tools.development.gwt.AppEngineLauncher -war C:\Users\tafaseck\git\BO\BackOffice1.0\war sn.hubsocial.avisjournaux.backoffice.BackOffice1_0"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-superDevMode -remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -startupUrl BackOffice1_0.html -logLevel INFO -codeServerPort 9997 -port 8888 -server com.google.appengine.tools.development.gwt.AppEngineLauncher -war C:\Users\tafaseck\git\BO\BackOffice1.0\war sn.hubsocial.avisjournaux.backoffice.BackOffice1_0"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="BackOffice1.0"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=50 -Xmx512m &quot;-javaagent:G:\logiciels\pour java\eclipse-jee-luna-SR1-win32-x86_64\eclipse\plugins\com.google.appengine.eclipse.sdkbundle_1.9.25\appengine-java-sdk-1.9.25\lib\agent\appengine-agent.jar&quot;"/>
 </launchConfiguration>

@@ -132,8 +132,8 @@ public class Commons
     	
     	return str.replace("'","\\'");
     }
-   public static final String ASKANE_SERVER = "http://askaneserver.appspot.com";
-  // public static final String ASKANE_SERVER = "http://askaneservertest.appspot.com";
+   //public static final String ASKANE_SERVER = "http://askaneserver.appspot.com";
+   public static final String ASKANE_SERVER = "http://askaneservertest.appspot.com";
    // public static final String ASKANE_SERVER = "http://localhost:8070";
     public static final String HTTP_REST_OBJECT = ASKANE_SERVER + "/rest/object";
     public static final String HTTP_REST_PRODUCT = ASKANE_SERVER + "/rest/product";

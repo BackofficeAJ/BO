@@ -13,15 +13,15 @@ import org.fusesource.restygwt.client.RestService;
 
 import sn.hubsocial.avisjournaux.backoffice.client.entities.Objet;
 
-public interface ObjetProxy extends RestService{
+public interface ObjetProxy extends   RestService{
 
-	@Path("/rest/objet")
+	@Path("../rest/objet")
 	@PUT
-	public   void saveOrUpdate(String json, MethodCallback<Objet>Callback) ;
+	public   void saveOrUpdate(Objet json, MethodCallback<Objet>Callback) ;
 	@Path("../rest/objet")
 	@GET
 	public    void find( @QueryParam("rp") String path, @QueryParam("page") String page, MethodCallback<List<Objet>> Callback) ;
-	@Path("/rest/objet")
+	@Path("../rest/objet")
 	@DELETE
 	public  void remove(MethodCallback<Boolean> callback) ;
 	

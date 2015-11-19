@@ -13,6 +13,10 @@
 		.grid{
 			padding: 10px;
 		}
+		.menuItems{
+			margin: 20px 20px 0px 20px;
+			padding: 20px 20px 0px 20px;
+		}
 		.headerItems{
 			padding: 20px 20px 0px 20px;
 		}
@@ -37,35 +41,20 @@
 		
 			<m:MaterialRow>
 		        <m:MaterialLabel text=" Gestion des Structures" fontSize="1.5" addStyleNames="{style.headerItems} left"/> 
-		        
-		        <m:MaterialIcon tooltip="rechercher"  icon="mdi-action-search" size="small" addStyleNames="{style.headerItems} right"/>
+		        <m:MaterialIcon addStyleNames="{style.headerItems} right"/>
+		        <m:MaterialIcon icon="apps" tooltip="Menu" activates="dp-3" waves="default" size="small" addStyleNames="{style.menuItems} right" />
+		        <m:MaterialDropDown name="dp-3" belowOrigin="false" constraintWidth="false">
+			        <m:MaterialLink ui:field="modifier" fontSize="0.7" text="Modifier " textColor="black" waves="default" icon="mode_edit" size="small" separator="true"/>
+			        <m:MaterialLink ui:field="supprimer" fontSize="0.7" text="Supprimer " textColor="black" waves="default" icon="delete" size="small" separator="true"/>
+			    </m:MaterialDropDown>
+		        <m:MaterialIcon ui:field="structureForm" tooltip="Ajouter Structure" icon="add_circle" waves="default" textColor="red" size="small" addStyleNames="{style.menuItems} right"/>
 		        <m:MaterialTextBox placeholder="Search" addStyleNames="right"/>
-		    </m:MaterialRow>
-		    <m:MaterialCollapsible type="POPOUT" >   		
-					<!-- <m:MaterialCollapsibleItem>
-						
-							<m:MaterialCollapsibleHeader><m:MaterialLink ui:field="formulaireCollaps" text="Enregistrer une Structure" icon="mdi-content-add"  textColor="red"/></m:MaterialCollapsibleHeader>
-							 <m:MaterialCollapsibleBody>
-									<m:MaterialTextBox  placeholder="Nom" ui:field="nom"/>
-									<m:MaterialTextBox placeholder="Numero" ui:field="numero" icon="mdi-editor-format-list-numbered"/>
-									 <m:MaterialTextBox type="email" ui:field="email" placeholder="Email" icon="mdi-action-account-circle"/>
-									 <div class="pos">
-									 	 <br/><m:MaterialButton ui:field="submit" text="Ajouter" 
-									 	 	waves="light" size="large" icon="mdi-action-note-add" color="red" iconPosition="right"/>
-									 </div>
-							</m:MaterialCollapsibleBody>
-						
-					</m:MaterialCollapsibleItem>
-					 -->
-					<m:MaterialCollapsibleItem>
-						
-							<m:MaterialCollapsibleHeader><m:MaterialLink ui:field="listeCollaps" text="Liste des Structures" icon="mdi-action-view-list" textColor=" red "/></m:MaterialCollapsibleHeader>
-						    <m:MaterialCollapsibleBody>
-						    	<g:SimplePanel ui:field="gridPanel" />								
-							</m:MaterialCollapsibleBody>
-											
-					</m:MaterialCollapsibleItem>										
-				</m:MaterialCollapsible>			
+		        <m:MaterialIcon tooltip="Rechercher" waves="default" icon="search" size="small" addStyleNames="{style.menuItems} right" />  
+		     </m:MaterialRow>
+			 <m:MaterialRow addStyleNames="card">
+				<g:SimplePanel ui:field="gridPanel"  />	
+				<g:SimplePanel ui:field="pagerPanel" addStyleNames="{style.panelPager} right"/>	
+			 </m:MaterialRow>	
 		</m:MaterialRow>
 		
 	</g:HTMLPanel>
