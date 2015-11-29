@@ -1,7 +1,9 @@
 package sn.hubsocial.avisjournaux.backoffice.client.entities;
 
+import java.io.Serializable;
 
-public class UserApplication extends Entity{
+
+public class UserApplication extends Entity implements Serializable{
 	/**
 	 * 
 	 */

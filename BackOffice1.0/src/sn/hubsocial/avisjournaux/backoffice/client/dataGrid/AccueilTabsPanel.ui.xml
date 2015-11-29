@@ -7,12 +7,17 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
+		
 		<m:MaterialTabs ui:field="tab2" color="red darken-3" textColor="white" indicatorColor="yellow" waves="yellow">
 			<m:tab><g:Label text="Annonce"/></m:tab>
+			<m:tab><g:Label text="Quotidien"/></m:tab>
 			<m:tab><g:Label text="Structure"/></m:tab>
 			<m:tab><g:Label text="Avis"/></m:tab>
 			<m:content>
 				<g:HTMLPanel ui:field="content"  />
+			</m:content>
+			<m:content>
+				<g:HTMLPanel ui:field="content0"  />
 			</m:content>
 			<m:content>
 				<g:HTMLPanel ui:field="content1"  />
@@ -21,6 +26,7 @@
 					<g:HTMLPanel ui:field="content2"  />
 			</m:content>
 		</m:MaterialTabs>
+		
 		
 	</g:HTMLPanel>
 </ui:UiBinder> 

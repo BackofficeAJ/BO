@@ -250,7 +250,7 @@ public class AnnonceDataGrid  extends Composite {
 	}
 
 	private void getAllAnnonce() {
-		orders.add(new AnnonceDTO("logo.jpg","titre","Resume", "Structure",  "Parue dans", "Dakar"));
+		orders.add(new AnnonceDTO("logo.jpg","nom","Resume", "Structure",  "Parue dans", "Dakar"));
 //		orders.add(new OrderDTO(1, "Karah","http://lorempixel.com/50/50/people?1", "Asus", "Php 23000"));
 		
 		ModeleAnnonceProvider.setList(orders);

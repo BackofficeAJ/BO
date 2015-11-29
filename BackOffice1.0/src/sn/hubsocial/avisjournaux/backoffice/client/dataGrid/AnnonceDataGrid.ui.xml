@@ -5,7 +5,6 @@
 	
 
 	<ui:style>
-		
 		.table{
 			width: 100%;
 		}
@@ -14,6 +13,10 @@
 		}
 		.grid{
 			padding: 10px;
+		}
+		.menuItems{
+			margin: 20px 20px 0px 20px;
+			padding: 20px 20px 0px 20px;
 		}
 		.headerItems{
 			padding: 20px 20px 0px 20px;
@@ -26,19 +29,38 @@
 		padding-left: 500px;
 
 	} 
+	
 	</ui:style>
 	<g:HTMLPanel>
 		<style is='custom-style'>
-
+			.pos{
+				margin-left: 80%;
+			}
+			.material-icons{
+			vertical-align: middle;
+			margin-right: 10px;
+			}
+			.dropdown-content {
+			    right: 25px;
+			    top: 55px;
+			}
 		</style>
+		
 		
 		<m:MaterialRow addStyleNames="card">
 		
 			<m:MaterialRow>
-		        <m:MaterialLabel text=" Gestion des ANNONCES" fontSize="1.5" addStyleNames="{style.headerItems} left"/>
-		         <m:MaterialIcon tooltip="Rechercher" icon="mdi-action-search" size="small" addStyleNames="{style.headerItems} right"/>
+		        <m:MaterialLabel text=" Gestion des Annonces" fontSize="1.5" addStyleNames="{style.headerItems} left"/> 
+		        <m:MaterialIcon addStyleNames="{style.headerItems} right"/>
+		        <m:MaterialIcon icon="apps" tooltip="Menu" activates="dp-1" waves="default" size="small" addStyleNames="{style.menuItems} right" />
+		        <m:MaterialDropDown name="dp-1" belowOrigin="false" constraintWidth="false">
+			        <m:MaterialLink ui:field="modifier" fontSize="0.7" text="Modifier " textColor="black" waves="default" icon="mode_edit" size="small" separator="true"/>
+			        <m:MaterialLink ui:field="supprimer" fontSize="0.7" text="Supprimer " textColor="black" waves="default" icon="delete" size="small" separator="true"/>
+			    </m:MaterialDropDown>
+		        <m:MaterialIcon ui:field="" tooltip="" icon="add_circle" waves="default" textColor="red" size="small" addStyleNames="{style.menuItems} right"/>
 		        <m:MaterialTextBox placeholder="Search" addStyleNames="right"/>
-		    </m:MaterialRow>  
+		        <m:MaterialIcon tooltip="Rechercher" waves="default" icon="search" size="small" addStyleNames="{style.menuItems} right" />  
+		     </m:MaterialRow>
 		    
 		    <m:MaterialRow>	
 		    		<g:SimplePanel ui:field="gridPanel" />	

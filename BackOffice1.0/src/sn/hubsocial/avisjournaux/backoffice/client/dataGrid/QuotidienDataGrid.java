@@ -5,7 +5,7 @@ import gwt.material.design.client.type.ModalType;
 import gwt.material.design.client.ui.MaterialModal;
 import gwt.material.design.client.ui.MaterialToast;
 import sn.hubsocial.avisjournaux.backoffice.client.DTO.AvisDTO;
-import sn.hubsocial.avisjournaux.backoffice.client.DTO.StructureDTO;
+import sn.hubsocial.avisjournaux.backoffice.client.DTO.QuotidienDTO;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -32,29 +32,29 @@ import com.google.gwt.view.client.MultiSelectionModel;
 import com.google.gwt.view.client.ProvidesKey;
 import com.google.gwt.view.client.SelectionModel;
 
-public class StructureDataGrid extends Composite {
+public class QuotidienDataGrid extends Composite {
 
-	private static StructureDataGridUiBinder uiBinder = GWT.create(StructureDataGridUiBinder.class);
+	private static QuotidienDataGridUiBinder uiBinder = GWT.create(QuotidienDataGridUiBinder.class);
 
-	interface StructureDataGridUiBinder extends	UiBinder<Widget, StructureDataGrid> { }
+	interface QuotidienDataGridUiBinder extends	UiBinder<Widget, QuotidienDataGrid> { }
 	
-	private List<StructureDTO> orders = new ArrayList<StructureDTO>();
+	private List<QuotidienDTO> orders = new ArrayList<QuotidienDTO>();
 	
 	
-	public ListDataProvider<StructureDTO> getModelStructureProvider() {
-		return ModelStructureProvider;
+	public ListDataProvider<QuotidienDTO> getModelQuotienProvider() {
+		return modelQuotidienProvider;
 	}
 
 	public void setModelStructureProvider(
-			ListDataProvider<StructureDTO> modelStructureProvider) {
-		ModelStructureProvider = modelStructureProvider;
+			ListDataProvider<QuotidienDTO> modelQuotidienProvider) {
+		modelQuotidienProvider = modelQuotidienProvider;
 	}
 
-	public ListHandler<StructureDTO> getSortDataHandler() {
+	public ListHandler<QuotidienDTO> getSortDataHandler() {
 		return sortDataHandler;
 	}
 
-	public void setSortDataHandler(ListHandler<StructureDTO> sortDataHandler) {
+	public void setSortDataHandler(ListHandler<QuotidienDTO> sortDataHandler) {
 		this.sortDataHandler = sortDataHandler;
 	}
 
@@ -79,6 +79,26 @@ public class StructureDataGrid extends Composite {
 
 	
 
+	private DataGrid<QuotidienDTO> dataGrid;
+	private ListDataProvider<QuotidienDTO> modelQuotidienProvider;
+	private ListHandler<QuotidienDTO> sortDataHandler;
+	private final ProvidesKey<QuotidienDTO> KEY_PROVIDER = new ProvidesKey<QuotidienDTO>() {
+
+		@Override
+		public Object getKey(QuotidienDTO item) {
+			return item.getId();
+		}
+	};
+	
+	private final SelectionModel<QuotidienDTO> selectionModel = new MultiSelectionModel<QuotidienDTO>(KEY_PROVIDER);
+	private QuotidienDTO quotidienDtoSelected;
+	private QuotidienDTO ModelStructure;
+	public ArrayList<Long> alID;
+	private long id;
+	private int nbreSelection;
+	
+	
+	
 	public int getNbreSelection() {
 		return nbreSelection;
 	}
@@ -87,27 +107,9 @@ public class StructureDataGrid extends Composite {
 		this.nbreSelection = nbreSelection;
 	}
 
-	private DataGrid<StructureDTO> dataGrid;
-	private ListDataProvider<StructureDTO> ModelStructureProvider;
-	private ListHandler<StructureDTO> sortDataHandler;
-	private final ProvidesKey<StructureDTO> KEY_PROVIDER = new ProvidesKey<StructureDTO>() {
-
-		@Override
-		public Object getKey(StructureDTO item) {
-			return item.getId();
-		}
-	};
-	
-	private final SelectionModel<StructureDTO> selectionModel = new MultiSelectionModel<StructureDTO>(KEY_PROVIDER);
-	private StructureDTO structureDtoSelected;
-	private StructureDTO ModelStructure;
-	public ArrayList<Long> alID;
-	private long id;
-	private int nbreSelection = 0;
-	
 	@UiField SimplePanel gridPanel, pagerPanel;
 
-	public StructureDataGrid() {
+	public QuotidienDataGrid() {
 		initWidget(uiBinder.createAndBindUi(this));
 		setGrid();
 		alID = new ArrayList<Long>();
@@ -121,37 +123,38 @@ public class StructureDataGrid extends Composite {
 	}
 	
 	private void refreshData() {
-		StructureDTO.retrieve(this);
-		//ModelStructureProvider.setList(new ArrayList<StructureDTO>());
-		//getAllOrderDTO();
+		QuotidienDTO.retrieve(this);
+//		modelQuotidienProvider.setList(new ArrayList<QuotidienDTO>());
+//		getAllOrderDTO();
+		
 	}
 
-	private DataGrid<StructureDTO> createDatagrid() {
+	private DataGrid<QuotidienDTO> createDatagrid() {
 
-		this.sortDataHandler = new ListHandler<StructureDTO>(new ArrayList<StructureDTO>());
+		this.sortDataHandler = new ListHandler<QuotidienDTO>(new ArrayList<QuotidienDTO>());
 
 		// CHECKBOX
-		Column<StructureDTO, Boolean> checkColumn = new Column<StructureDTO, Boolean>(new MaterialCheckBoxCell()) {
+		Column<QuotidienDTO, Boolean> checkColumn = new Column<QuotidienDTO, Boolean>(new MaterialCheckBoxCell()) {
 			@Override
-			public Boolean getValue(StructureDTO object) {
+			public Boolean getValue(QuotidienDTO object) {
 				boolean value = selectionModel.isSelected(object);	
 				return value;
 			}
 		};
 
-		FieldUpdater<StructureDTO, Boolean> checkColumnFU = new FieldUpdater<StructureDTO, Boolean>() {
+		FieldUpdater<QuotidienDTO, Boolean> checkColumnFU = new FieldUpdater<QuotidienDTO, Boolean>() {
 		
 		    @Override
-		    public void update(int index, StructureDTO object, Boolean value) {
+		    public void update(int index, QuotidienDTO object, Boolean value) {
 		    	// MaterialToast.alert("blaaaaaaaaaaa");
 		    	selectionModel.setSelected(object, value);		        
 		        id = object.getId();
-		        structureDtoSelected = object;
+		        quotidienDtoSelected = object;
 		      //  MaterialToast.alert("blייייייייייי");
 		    	if (alID.contains(id)== true) {
 		    		alID.remove(id);
 		    		nbreSelection -=1;
-		         //   MaterialToast.alert(""+(nbreSelection));
+		            //MaterialToast.alert(""+(nbreSelection));
 		           // MaterialToast.alert("remove");
 		    	//	 MaterialToast.alert("bloooooooooooo");
 				}
@@ -168,76 +171,80 @@ public class StructureDataGrid extends Composite {
 		checkColumn.setFieldUpdater(checkColumnFU);
 		
      // NOM
- 		final TextColumn<StructureDTO> colNom = new TextColumn<StructureDTO>() {
+ 		final TextColumn<QuotidienDTO> colNom = new TextColumn<QuotidienDTO>() {
  			@Override
- 			public String getValue(StructureDTO object) {
- 				if (object.getNom() != null) {
- 					return object.getNom();
+ 			public String getValue(QuotidienDTO object) {
+ 				if (object.getName() != null) {
+ 					return object.getName();
 				}
  				return "";
  			}
  		};
  		colNom.setSortable(true);
- 		sortDataHandler.setComparator(colNom, new Comparator<StructureDTO>() {
+ 		sortDataHandler.setComparator(colNom, new Comparator<QuotidienDTO>() {
 
  			@Override
- 			public int compare(StructureDTO o1, StructureDTO o2) {
+ 			public int compare(QuotidienDTO o1, QuotidienDTO o2) {
 
- 				return o1.getNom().compareTo(o2.getNom());
+ 				return o1.getName().compareTo(o2.getName());
  			}
  		});
  		
+ 	// Email
+ 			TextColumn<QuotidienDTO> colEmail = new TextColumn<QuotidienDTO>() {
+ 				@Override
+ 				public String getValue(QuotidienDTO object) {
+ 					if (object.getEmail() != null) {
+ 						return object.getEmail();
+ 					}
+ 					return "";
+ 				}
+ 			};
+ 			colEmail.setSortable(true);
+ 			sortDataHandler.setComparator(colEmail, new Comparator<QuotidienDTO>() {
 
-	// NUMERO
-		TextColumn<StructureDTO> colNumero = new TextColumn<StructureDTO>() {
+ 				@Override
+ 				public int compare(QuotidienDTO o1, QuotidienDTO o2) {
+
+ 					return o1.getEmail().compareTo(o2.getEmail());
+ 				}
+ 			});
+
+	// PAYS
+		TextColumn<QuotidienDTO> colPays = new TextColumn<QuotidienDTO>() {
 			@Override
-			public String getValue(StructureDTO object) {
-				if (object.getNumero() != null) {
-					return object.getNumero();
+			public String getValue(QuotidienDTO object) {
+				if (object.getPays() != null) {
+					if (object.getPays().getLibelle() != null) {
+						return object.getPays().getLibelle();
+					}					
 				}
 				return "";
 			}
 		};
-		colNumero.setSortable(true);
-		sortDataHandler.setComparator(colNumero, new Comparator<StructureDTO>() {
+		colPays.setSortable(true);
+		sortDataHandler.setComparator(colPays, new Comparator<QuotidienDTO>() {
 
 			@Override
-			public int compare(StructureDTO o1, StructureDTO o2) {
+			public int compare(QuotidienDTO o1, QuotidienDTO o2) {
 
-				return o1.getNumero().compareTo(o2.getNumero());
+				return o1.getPays().getLibelle().compareTo(o2.getPays().getLibelle());
 			}
 		});
         
-     // Email
-		TextColumn<StructureDTO> colEmail = new TextColumn<StructureDTO>() {
-			@Override
-			public String getValue(StructureDTO object) {
-				if (object.getEmail() != null) {
-					return object.getEmail();
-				}
-				return "";
-			}
-		};
-		colEmail.setSortable(true);
-		sortDataHandler.setComparator(colEmail, new Comparator<StructureDTO>() {
-
-			@Override
-			public int compare(StructureDTO o1, StructureDTO o2) {
-
-				return o1.getEmail().compareTo(o2.getEmail());
-			}
-		});
+     
         
         //
 
-		final DataGrid<StructureDTO> dataGrid = new DataGrid<StructureDTO>(100, KEY_PROVIDER);
+		final DataGrid<QuotidienDTO> dataGrid = new DataGrid<QuotidienDTO>(100, KEY_PROVIDER);
 		dataGrid.setSize("100%", "75vh");
 		
 		dataGrid.addColumn(checkColumn, SafeHtmlUtils.fromSafeConstant("<br/>"));
 		dataGrid.setColumnWidth(checkColumn, "40px");
 		dataGrid.addColumn(colNom, "Nom");
-		dataGrid.addColumn(colNumero, "Numero");
 		dataGrid.addColumn(colEmail, "Email");
+		dataGrid.addColumn(colPays, "Pays");
+		
 
 		dataGrid.setStyleName("responsive-table");
 		
@@ -247,8 +254,8 @@ public class StructureDataGrid extends Composite {
 		pager.setDisplay(dataGrid);
 		pagerPanel.add(pager);
 
-		ModelStructureProvider = new ListDataProvider<StructureDTO>();
-		ModelStructureProvider.addDataDisplay(dataGrid);
+		modelQuotidienProvider = new ListDataProvider<QuotidienDTO>();
+		modelQuotidienProvider.addDataDisplay(dataGrid);
 		dataGrid.addColumnSortHandler(sortDataHandler);
 
 		return dataGrid;
@@ -258,9 +265,9 @@ public class StructureDataGrid extends Composite {
 		
 
 		//Ajout des valeurs 
-				//	orders.add(new StructureDTO( nomS , numeroS , emailS ));
-					ModelStructureProvider.setList(orders);
-					sortDataHandler.setList(ModelStructureProvider.getList());
+				//	orders.add(new QuotidienDTO( nomS , numeroS , emailS ));
+				//	modelQuotidienProvider.setList(orders);
+				//	sortDataHandler.setList(modelQuotidienProvider.getList());
 					MaterialToast.alert("Ajout avec succes!!!");
 				
 		//remise a zero
@@ -269,47 +276,45 @@ public class StructureDataGrid extends Composite {
 //					pays.setText("");
 				
 	}
-	public StructureDTO getModelStructure() {
+	public QuotidienDTO getModelStructure() {
 		return ModelStructure;
 	}
 
-	public void setModelStructure(StructureDTO ModelStructure) {
+	public void setModelStructure(QuotidienDTO ModelStructure) {
 		this.ModelStructure = ModelStructure;
 	}
 	
-//	popup pour enrigistrer une structure
-	@UiHandler("structureForm")
+//	popup pour enrigistrer une organisation
+	@UiHandler("quotidienForm")
     void onStructureEdit(ClickEvent e) {
-		
-        MaterialModal.showWindow(new StructureFormDataGrid(this), ModalType.WINDOW, "Enregistrer une Structure","blue",false);
+        MaterialModal.showWindow(new QuotidienFormDataGrid(this), ModalType.WINDOW, "Enregistrer un Quotidien","blue",false);
 	}
 //	popup pour modifier une structure
 	@UiHandler("modifier")
 	 void onStructureModify(ClickEvent e) {
 		if (nbreSelection == 1) {
-			
-			MaterialModal.showWindow(new StructureFormDataGrid(structureDtoSelected, this), ModalType.WINDOW, "Modifier une Structure","blue",false);
-			MaterialToast.alert("traaaaaaaaaaaaa");
+			MaterialModal.showWindow(new QuotidienFormDataGrid(quotidienDtoSelected, this), ModalType.WINDOW, "Modifier une Structure","blue",false);
+			nbreSelection --;
 		}
 		else {
-			MaterialToast.alert("veuillez selectionner une seule Structure");
+			MaterialToast.alert("veuillez selectionner un seul Quotidien");
 		}
 		
 	}
-        
-//	supprimer une structure
+//        
+////	supprimer une structure
 	@UiHandler("supprimer")
 	void onStructureDelete(ClickEvent e){
 		if (nbreSelection == 1){
-			StructureDTO.delete(structureDtoSelected, this);
-			
+			QuotidienDTO.delete(quotidienDtoSelected, this);
+			nbreSelection --;
 		}	
 		else{
 			MaterialToast.alert("Vous ne pouvez supprimer qu'une seule structure א la fois");
 			return;
 		}
 	}
-	
+//	
 	public String getSortOrder() {
 		return sortOrder;
 	}

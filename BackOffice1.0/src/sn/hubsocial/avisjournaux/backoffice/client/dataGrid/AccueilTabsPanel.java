@@ -14,7 +14,7 @@ public class AccueilTabsPanel extends Composite {
 
 	private static MaterialTabsPanelUiBinder uiBinder = GWT.create(MaterialTabsPanelUiBinder.class);
 	
-	@UiField HTMLPanel content, content1, content2;
+	@UiField HTMLPanel content, content0, content1, content2;
 
 	interface MaterialTabsPanelUiBinder extends UiBinder<Widget, AccueilTabsPanel> {
 	}
@@ -26,9 +26,11 @@ public class AccueilTabsPanel extends Composite {
 		
 		
 		AnnonceDataGrid panelAnnonce = new AnnonceDataGrid();
+		QuotidienDataGrid panelQuotidien = new QuotidienDataGrid();
 		StructureDataGrid panelStructure =new StructureDataGrid();
 		AvisDataGrid panelAvis= new AvisDataGrid();
 		content.add(panelAnnonce);
+		content0.add(panelQuotidien);
 		content1.add(panelStructure);
 		content2.add(panelAvis);
 		tab2.setTabIndex(3);

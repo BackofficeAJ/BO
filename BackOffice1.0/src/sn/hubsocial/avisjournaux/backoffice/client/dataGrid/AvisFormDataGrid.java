@@ -3,12 +3,18 @@ package sn.hubsocial.avisjournaux.backoffice.client.dataGrid;
 import java.util.List;
 
 import sn.hubsocial.avisjournaux.backoffice.client.DTO.AvisDTO;
+import sn.hubsocial.avisjournaux.backoffice.client.DTO.QuotidienDTO;
+import sn.hubsocial.avisjournaux.backoffice.client.DTO.StructureDTO;
 import sn.hubsocial.avisjournaux.backoffice.client.entities.Objet;
+import sn.hubsocial.avisjournaux.backoffice.client.entities.Organisation;
+import sn.hubsocial.avisjournaux.backoffice.client.entities.UserApplication;
 import gwt.material.design.client.custom.MaterialSuggestionOracle;
 import gwt.material.design.client.ui.MaterialAutoComplete;
+import gwt.material.design.client.ui.MaterialFileInput;
 import gwt.material.design.client.ui.MaterialListBox;
 import gwt.material.design.client.ui.MaterialModal;
 import gwt.material.design.client.ui.MaterialTextArea;
+import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
 
 import com.google.gwt.core.client.GWT;
@@ -25,97 +31,148 @@ public class AvisFormDataGrid extends Composite {
 
 	interface ModalContentUiBinder extends UiBinder<Widget, AvisFormDataGrid> {
 	}
-	String structtitre[] = {"titre","AVIS D'APPEL D'OFFRES OUVERT","AVIS DE DEMANDE DE RENSEIGNEMENTS ET DE PRIX OUVERT","AVIS D'ATTRIBUTION PROVISOIRE DE MARCHE"};
-	String structtype[]= {"Paru dans le Soleil","Paru dans l'Observateur","Paru dans le SUD Quotidien"};
-	private AvisDataGrid avisDataGridTempon;
-	@UiField MaterialListBox titre;
-	@UiField MaterialAutoComplete structure;
-	@UiField MaterialTextArea resume;
-	@UiField MaterialListBox type;
 	
+	String nomAvis[] = {"Nom","AVIS D'APPEL D'OFFRES OUVERT","AVIS DE DEMANDE DE RENSEIGNEMENTS ET DE PRIX OUVERT","AVIS D'ATTRIBUTION PROVISOIRE DE MARCHE"};
+	
+	private AvisDataGrid avisDataGridTempon;
+	private int page = 0;
+	private int offset = 10;
+	private MaterialSuggestionOracle suggestions;
+	private AvisDTO avisDTO;
+	private Long id;
+	
+
+	@UiField MaterialListBox nom;
+	@UiField MaterialAutoComplete structure;
+	@UiField MaterialTextBox titre;
+	@UiField MaterialTextArea resume;
+	@UiField MaterialAutoComplete typeQuot;
+	@UiField MaterialFileInput fichierPDF;
+	
+	
+	public MaterialAutoComplete getTypeQuot() {
+		return typeQuot;
+	}
+	public void setTypeQuot(MaterialAutoComplete typeQuot) {
+		this.typeQuot = typeQuot;
+	}
+	
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
+	public int getOffset() {
+		return offset;
+	}
+	public void setOffset(int offset) {
+		this.offset = offset;
+	}
 	public AvisFormDataGrid() {
 		initWidget(uiBinder.createAndBindUi(this));
-		for (int i = 0; i < structtype.length; i++) {
-			type.addItem(structtype[i]);
-		}
-		for (int i = 0; i < structtitre.length; i++) {
-			titre.addItem(structtitre[i]);
+		for (int i = 0; i < nomAvis.length; i++) {
+			nom.addItem(nomAvis[i]);
 		}		
-		titre.setValue(0, null);
-		
-		structure.setSuggestions(getSuggestions());
-		structure.getItemValues();
-
+		nom.setValue(0, null);
 	}
+	
+	
 	public AvisFormDataGrid(AvisDataGrid avisDataGrid) {
-		initWidget(uiBinder.createAndBindUi(this));
-		for (int i = 0; i < structtype.length; i++) {
-			type.addItem(structtype[i]);
-		}
-		for (int i = 0; i < structtitre.length; i++) {
-			titre.addItem(structtitre[i]);
-		}		
-		titre.setValue(0, null);
-		
-		structure.setSuggestions(getSuggestions());
-		structure.getItemValues();
+		this();
 		this.avisDataGridTempon = avisDataGrid;
-
+		StructureDTO.retrieveStructure(this);
+		QuotidienDTO.retrieveQuotidien(this);
 	}
 	
-	  private MaterialSuggestionOracle getSuggestions() {
-	        MaterialSuggestionOracle suggestions = new MaterialSuggestionOracle(); suggestions.add("Alabama");
-	        suggestions.add("Alaska");
-	        suggestions.add("Arizona");
-	        suggestions.add("Arkansas");
-	        suggestions.add("California");
-	        suggestions.add("Colorado");
-	        suggestions.add("Connecticut");
-	        suggestions.add("Delaware");
-	        
-	        return suggestions;
-	    }
+	public AvisFormDataGrid(AvisDTO avisDTO, AvisDataGrid avisDataGrid ){
+		this();
+		this.avisDataGridTempon = avisDataGrid;
+		this.avisDTO = avisDTO;
+		nom.setItemText(0, avisDTO.getNom());
+		resume.setText(avisDTO.getResume());
+		id = avisDTO.getId();
+		StructureDTO.retrieveStructure(this);
+		QuotidienDTO.retrieveQuotidien(this);
+		
+		
+	}
 	
+	 public MaterialAutoComplete getStructure() {
+		return structure;
+	}
+	public void setStructure(MaterialAutoComplete structure) {
+		this.structure = structure;
+	}
 	
 	@UiHandler("btnAgree")
 	void onAgree(ClickEvent e) {
 		//recuperation des valeurs saisies
-		int indexTitre = titre.getSelectedIndex();		
-		String titreSaisi = titre.getItemText(indexTitre);		
-		List<String> structureSaisi = structure.getItemValues();						
-		//String nomImg= fichierimage.getFilename();		
-		String resumeSaisi = resume.getText().toUpperCase();				
-		int indexType = type.getSelectedIndex();		
-		String typeSaisi = type.getItemText(indexType);
-		if (indexTitre == -1) {
-			MaterialToast.alert("Titre requis");
+		int indexNom = nom.getSelectedIndex();		
+		String nomSaisi = nom.getItemText(indexNom);		
+		List<String> structureSelected = structure.getItemValues();
+		String structureSelected_0 = structureSelected.get(0);	
+		String titreSelected = titre.getValue();
+		String resumeSaisi = resume.getText().toUpperCase();
+		
+		List<String> quotidienSelected = typeQuot.getItemValues();
+		String quotidienSelected_0 = quotidienSelected.get(0);
+		
+		if (indexNom == -1) {
+			MaterialToast.alert("Nom requis");
 			return;
 		}
-		else if (structureSaisi.isEmpty() ) {
+		else if (structureSelected.isEmpty() ) {
 			structure.setError("Structure requise ");
 			return;
 		}
+		else if ("".equals(titreSelected)) {
+			structure.setSuccess("valide");
+			titre.setError("Titre requis ");
+		}
 		else if ("".equals(resumeSaisi)) {
 			structure.setSuccess("valide");
+			titre.setSuccess("valide");
 			resume.setError("Structure requise ");
 			return;
 		}
-		else if (indexType == -1) {
+		
+		else if (quotidienSelected.isEmpty()) {
 			structure.setSuccess("valide");
+			titre.setSuccess("valide");
 			resume.setSuccess("valide");
-			MaterialToast.alert("Quotidien requis");
+			typeQuot.setError("Quotidien requis");
 			return;
 		}
 		
-		MaterialToast.alert("OK");
+//		MaterialToast.alert("OK");
 //		Enregistrement dans la base de données
 		Objet avis = new Objet();
-		avis.setName(titreSaisi);
+		if (avisDTO != null) {
+			
+			avis.setId(id);
+		}	
+		
+		avis.setName(nomSaisi);
+		
+		for(UserApplication obj : StructureDTO.listUserApplication){
+			if (obj.getNom() == structureSelected_0) {
+				avis.setCreatorId(obj.getId());
+			}
+		}
+		
 		avis.setDescription(resumeSaisi);
-		//avis.setOrganisationId(organisationId);
-		//avis.setCreator(typeSaisi);
+		
+		for(Organisation obj : QuotidienDTO.listOrganistion){
+			if (obj.getName() == quotidienSelected_0) {
+				avis.setOrganisationId(obj.getId());
+				avis.setOrganisation(obj);
+			}
+		}
+		
+		
 		AvisDTO.save(avis,avisDataGridTempon);
-		//MaterialModal.closeModal();
+		MaterialModal.closeModal();
 	}
 	
 	@UiHandler("btnDisagree")

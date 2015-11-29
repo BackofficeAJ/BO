@@ -1,6 +1,5 @@
 package sn.hubsocial.avisjournaux.backoffice.client.DTO;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,16 +8,10 @@ import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.json.client.JSONObject;
-import com.google.gwt.json.client.JSONParser;
-import com.google.gwt.json.client.JSONValue;
-import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.view.client.ListDataProvider;
 
 import sn.hubsocial.avisjournaux.backoffice.client.JSO.ObjetJSO;
 import sn.hubsocial.avisjournaux.backoffice.client.dataGrid.AvisDataGrid;
-import sn.hubsocial.avisjournaux.backoffice.client.dataGrid.Commons;
 import sn.hubsocial.avisjournaux.backoffice.client.entities.Objet;
 import sn.hubsocial.avisjournaux.backoffice.client.restlet.proxy.ObjetProxy;
 
@@ -26,10 +19,10 @@ public class AvisDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	 private static int nextId = 0;
+	 private static long nextId = 0;
 	
 	private long id;
-	private String titre;
+	private String nom;
 	private StructureDTO structure;
 	private long structureId;
 	private String fichierPdf;
@@ -39,7 +32,7 @@ public class AvisDTO implements Serializable {
 	
 	public AvisDTO(ObjetJSO askaneObject){
 		this.id=askaneObject.getId();
-		this.titre=askaneObject.getName();
+		this.nom=askaneObject.getName();
 		this.resume=askaneObject.getDescription();
 		this.image=askaneObject.getImage();
 		if (askaneObject.getOrganisation() != null) {
@@ -55,7 +48,7 @@ public class AvisDTO implements Serializable {
 	
 	public AvisDTO(Objet objet){
 		this.id=objet.getId();
-		this.titre=objet.getName();
+		this.nom=objet.getName();
 		this.resume=objet.getDescription();
 		this.image=objet.getImage();
 		if (objet.getOrganisation() != null) {
@@ -66,16 +59,28 @@ public class AvisDTO implements Serializable {
 		}
 		
 	}
+	
+	public Objet entityFromDTO(){
+		
+		Objet objet = new Objet();
+		objet.setName(nom);
+		objet.setDescription(resume);
+		objet.setImage(image);
+		
+		objet.setCreatorId(structure.getId());
+		return objet;
+	}
+	
+	
 
 	public AvisDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AvisDTO( String titre, String structure,String fichierPdf, String resume , String quotidien, String image) {
+	public AvisDTO( String nom, String structure,String fichierPdf, String resume , String quotidien, String image) {
 		super();
-		 nextId++;
-	     this.id = nextId;
-		this.titre = titre;
+		 
+		this.nom = nom;
 		this.structure = new StructureDTO(structure, null, null);
 		this.fichierPdf = fichierPdf;
 		this.resume = resume;
@@ -95,12 +100,12 @@ public class AvisDTO implements Serializable {
 		this.id = id;
 	}
 
-	public String getTitre() {
-		return titre;
+	public String getNom() {
+		return nom;
 	}
 
-	public void setTitre(String titre) {
-		this.titre = titre;
+	public void setNom(String titre) {
+		this.nom = titre;
 	}
 
 	
@@ -218,7 +223,7 @@ public class AvisDTO implements Serializable {
 			      }
 			      
 			      avisDataGrid.getSortDataHandler().setList(avisDataGrid.getOrderDTOProvider().getList());
-				
+			      avisDataGrid.setNbreSelection(0);
 			}
 		});
 	}
@@ -250,4 +255,34 @@ public class AvisDTO implements Serializable {
 			}
 		});
 	}
+	
+	//	suppression
+	public static void delete (AvisDTO avis, final AvisDataGrid avisDataGrid){
+			
+			ObjetProxy objetProxy = GWT.create(ObjetProxy.class);
+			
+			
+			// Retrieve the contact
+			objetProxy.remove(Long.valueOf(avis.getId()), new MethodCallback <Boolean>(){
+			   
+	
+				@Override
+				public void onFailure(Method method, Throwable exception) {
+					// TODO Auto-generated method stub
+					String errormessage = exception.getMessage() + "\n";
+			    	for (StackTraceElement s : exception.getStackTrace()){
+			    		errormessage += s.getClassName() + " " +s.getMethodName() + " "+ s.getLineNumber()+ "\n" ;
+			    	}
+			    	Window.alert(errormessage);
+				}
+	
+				@Override
+				public void onSuccess(Method method, Boolean response) {
+					// TODO Auto-generated method stub				
+					retrieve(avisDataGrid);
+				}
+			});
+		}
+	
+
 }

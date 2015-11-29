@@ -30,32 +30,36 @@
 	} 
 	
 	</ui:style>
+	
 	<g:HTMLPanel>
 		<style is='custom-style'>
 			.pos{
 				margin-left: 80%;
 			}
-			.material-icons{
-				vertical-align: middle;
-				margin-right: 10px;
-			}
-			.dropdown-content {
-			   	right: 25px;
-			    top: 55px;
-			}
+			.gwt-SuggestBoxPopup{
+			z-index: 10000;
+		}
+		.material-icons{
+			vertical-align: middle;
+			margin-right: 10px;
+		}
+		.dropdown-content {
+		    right: 25px;
+		    top: 55px;
+		}
 		</style>
 		
 		<m:MaterialRow addStyleNames="card">
 		
 			<m:MaterialRow>
-		        <m:MaterialLabel text=" Gestion des Structures" fontSize="1.5" addStyleNames="{style.headerItems} left"/> 
+		        <m:MaterialLabel text=" Gestion des Quotidiens" fontSize="1.5" addStyleNames="{style.headerItems} left"/> 
 		        <m:MaterialIcon addStyleNames="{style.headerItems} right"/>
-		        <m:MaterialIcon icon="apps" tooltip="Menu" activates="dp-3" waves="default" size="small" addStyleNames="{style.menuItems} right" />
-		        <m:MaterialDropDown name="dp-3" belowOrigin="false" constraintWidth="false">
+		        <m:MaterialIcon icon="apps" tooltip="Menu" activates="dp-2" waves="default" size="small" addStyleNames="{style.menuItems} right" />
+		        <m:MaterialDropDown name="dp-2" belowOrigin="false" constraintWidth="false">
 			        <m:MaterialLink ui:field="modifier" fontSize="0.7" text="Modifier " textColor="black" waves="default" icon="mode_edit" size="small" separator="true"/>
 			        <m:MaterialLink ui:field="supprimer" fontSize="0.7" text="Supprimer " textColor="black" waves="default" icon="delete" size="small" separator="true"/>
 			    </m:MaterialDropDown>
-		        <m:MaterialIcon ui:field="structureForm" tooltip="Ajouter Structure" icon="add_circle" waves="default" textColor="red" size="small" addStyleNames="{style.menuItems} right"/>
+		        <m:MaterialIcon ui:field="quotidienForm" tooltip="Ajouter Quotidien" icon="add_circle" waves="default" textColor="red" size="small" addStyleNames="{style.menuItems} right"/>
 		        <m:MaterialTextBox placeholder="Search" addStyleNames="right"/>
 		        <m:MaterialIcon tooltip="Rechercher" waves="default" icon="search" size="small" addStyleNames="{style.menuItems} right" />  
 		     </m:MaterialRow>

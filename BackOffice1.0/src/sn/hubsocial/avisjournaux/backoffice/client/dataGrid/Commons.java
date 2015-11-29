@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 import org.apache.commons.io.IOUtils;
 
 public class Commons
@@ -107,7 +108,7 @@ public class Commons
     {
         try
         {
-            URL url = new URL((new StringBuilder("/Task?action=email&ln=")).append(urlLing).toString());
+            URL url = new URL((new StringBuilder("/Task?action=pays&ln=")).append(urlLing).toString());
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
             connection.setDoOutput(true);
             connection.setRequestMethod(method);
@@ -141,6 +142,7 @@ public class Commons
     public static final String HTTP_REST_CATEGORY = ASKANE_SERVER + "/rest/category";
     public static final String HTTP_REST_APPLICATION = ASKANE_SERVER + "/rest/application";
     public static final String HTTP_REST_USERAPPLICATION = ASKANE_SERVER + "/rest/userapplication";
+    public static final String HTTP_REST_ORGANISATION = ASKANE_SERVER + "/rest/organisation";
     public static final String HTTP_REST_ENTITY = ASKANE_SERVER + "/rest/entity";
     public static final String HTTP_REST_ZONE = ASKANE_SERVER + "/rest/zone";
     public static final String HTTP_REST_REQUEST = ASKANE_SERVER + "/rest/request";
@@ -287,7 +289,7 @@ public class Commons
     public static final String NOM = "nom";
     public static final String CODE = "code";
     public static final String PRENOM = "prenom";
-    public static final String LOGIN = "email";
+    public static final String LOGIN = "pays";
     public static final String PASSWD = "password";
     public static final String MD5 = "MD5";
     public static final String NEW_PASSWD = "newpassword";
@@ -295,7 +297,7 @@ public class Commons
     public static final String ADRESSE = "adresse";
     public static final String TELEPHONE = "telephone";
     public static final String INDICE_SN = "(+221)";
-    public static final String EMAIL = "email";
+    public static final String EMAIL = "pays";
     public static final String INVITATION = "invitation";
     public static final String INVITED_ID = "invitedId";
     public static final String ID_APPLICATION = "applicationId";
@@ -322,7 +324,7 @@ public class Commons
     public static final String METHOD_DELETE = "DELETE";
     public static final String NAME = "name";
     public static final String DESCRIPTION = "description";
-    public static final String TYPE = "type";
+    public static final String TYPE = "typeQuot";
     public static final String POSITION = "position";
     public static final String STATUS = "status";
     public static final String VISIBLE = "visible";
@@ -366,14 +368,14 @@ public class Commons
     public static final String PASS = "pass";
     public static final String CREATOR = "creatorId";
     public static final int NBR = 6;
-    public static final String SAME_EMAIL = "same-email";
+    public static final String SAME_EMAIL = "same-pays";
     public static final String WRONG_NUMBER = "wrong-number";
     public static final String WRONG_CAPTCHA = "wrong-captcha";
     public static final String SAISIR_SVP = "Saisir le mot SVP";
     public static final String ID_USERAPPLICATION = "userApplicationId";
     public static final String QUANTITY = "quantity";
     public static final String ANY = "any";
-    public static final String EMAIL_SECOUR = "email-secour";
+    public static final String EMAIL_SECOUR = "pays-secour";
     public static final String FOUND_EMAIL = "FOUNDEMAIL";
     public static final String MESSAGE_NEW_PASSWD = "Votre mot de passe a &eacute;t&eacute; renouvell&eacute;!";
     public static final String MESSAGE_FOUND_PASSWD = "Votre demande d'obtention de nouveau mot de passe a r&eacute;ussi les informations d'acc&egrave;s au compte ont &eacute;t&eacute; envoy&eacute; &agrave; ";

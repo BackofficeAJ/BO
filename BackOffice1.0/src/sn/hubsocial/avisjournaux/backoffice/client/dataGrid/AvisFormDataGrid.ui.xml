@@ -1,17 +1,38 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-			 xmlns:m="urn:import:gwt.material.design.client.ui">
+			 xmlns:m="urn:import:gwt.material.design.client.ui"
+			 xmlns:p='urn:import:com.vaadin.polymer.paper.widget'
+			 xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
 		.btn{
 			width: 150px;
 		}
 	</ui:style>
+	<g:HTMLPanel>
+	<style is='custom-style'>
+	.gwt-SuggestBoxPopup{
+			z-index: 10000;
+		}
+	.input-field {
+		    width: 735px;
+		    margin-top: 35px;
+    }
+    .file-path{
+	    margin-bottom: 10px;
+	    width: 500px;
+	    height: 20px;
+	}
+	</style>
 	<m:MaterialPanel>
 		<m:MaterialModalContent>
-			<m:MaterialListBox ui:field="titre" name="Title"/>
+			<m:MaterialListBox ui:field="nom" name="Nom"/>
 			<m:MaterialAutoComplete disabled="false" ui:field="structure" placeholder="Structure" />
-			<m:MaterialTextArea placeholder="Resume" ui:field="resume"/>
-			<m:MaterialListBox ui:field="type"/>
+			<m:MaterialTextBox ui:field="titre" placeholder="Titre" />
+			<!-- <m:MaterialSubHeader text="Charger un PDF" textColor="blue"/> -->
+			<m:MaterialFileInput ui:field="fichierPDF" /> 
+			<m:MaterialTextArea placeholder="Resume" ui:field="resume"/>			
+			<!--  <m:MaterialListBox ui:field="pays" name="Pays"/>-->
+			<m:MaterialAutoComplete ui:field="typeQuot" placeholder="Quotidien"/>
 		</m:MaterialModalContent>
 		
 		<m:MaterialModalFooter align="RIGHT">
@@ -19,4 +40,5 @@
 			<m:MaterialButton ui:field="btnDisagree" waves="RED" type="FLAT" text="Annuler" addStyleNames="{style.btn}" />
 		</m:MaterialModalFooter>
 	</m:MaterialPanel>
+	</g:HTMLPanel>
 </ui:UiBinder> 

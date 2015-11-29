@@ -22,7 +22,7 @@ import com.google.gson.reflect.TypeToken;
 import sn.hubsocial.avisjournaux.backoffice.client.dataGrid.Commons;
 import sn.hubsocial.avisjournaux.backoffice.client.entities.Objet;
 
-public class ObjetResource extends ServerResource implements EntityResourceInterface<Objet> {
+public class KeywordsResource extends ServerResource implements EntityResourceInterface<Objet> {
 
 public static Gson gson;
 	

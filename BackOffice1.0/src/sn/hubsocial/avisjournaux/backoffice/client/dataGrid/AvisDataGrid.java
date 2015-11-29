@@ -5,12 +5,12 @@ import gwt.material.design.client.type.ModalType;
 import gwt.material.design.client.ui.MaterialModal;
 import gwt.material.design.client.ui.MaterialToast;
 import sn.hubsocial.avisjournaux.backoffice.client.DTO.AvisDTO;
+import sn.hubsocial.avisjournaux.backoffice.client.entities.Objet;
+import sn.hubsocial.avisjournaux.backoffice.client.entities.UserApplication;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
-import org.apache.jasper.tagplugins.jstl.core.Remove;
 
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
@@ -29,6 +29,7 @@ import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
 import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -46,7 +47,7 @@ public class AvisDataGrid extends Composite {
 	interface MaterialDataGridUiBinder extends UiBinder<Widget, AvisDataGrid> { }
 	
 	 String structtype[]= {"Paru dans le Soleil","Paru dans l'Observateur","Paru dans le SUD Quotidien"};
-	 String structtitre[] = {"titre","AVIS D'APPEL D'OFFRES OUVERT","AVIS DE DEMANDE DE RENSEIGNEMENTS ET DE PRIX OUVERT","AVIS D'ATTRIBUTION PROVISOIRE DE MARCHE"};
+	 String structtitre[] = {"nom","AVIS D'APPEL D'OFFRES OUVERT","AVIS DE DEMANDE DE RENSEIGNEMENTS ET DE PRIX OUVERT","AVIS D'ATTRIBUTION PROVISOIRE DE MARCHE"};
 	
 	 
 	 
@@ -99,12 +100,21 @@ public class AvisDataGrid extends Composite {
 	};
 
 	private final SelectionModel<AvisDTO> selectionModel = new MultiSelectionModel<AvisDTO>(KEY_PROVIDER);
-
-	private AvisDTO OrderDTO;
+	private AvisDTO avisDtoSelected;
 	public ArrayList<Long> alID;
 	private long id;
 	private int nbreSelection;
+	
+	
+	
 
+	public int getNbreSelection() {
+		return nbreSelection;
+	}
+
+	public void setNbreSelection(int nbreSelection) {
+		this.nbreSelection = nbreSelection;
+	}
 	@UiField SimplePanel gridPanel, pagerPanel;
 	
 	public AvisDataGrid() {
@@ -130,10 +140,10 @@ public class AvisDataGrid extends Composite {
 		this.sortDataHandler = new ListHandler<AvisDTO>(new ArrayList<AvisDTO>());
 		
 		// CHECKBOX
-				Column<AvisDTO, Boolean> checkColumn = new Column<AvisDTO, Boolean>(new MaterialCheckBoxCell()) {
+			Column<AvisDTO, Boolean> checkColumn = new Column<AvisDTO, Boolean>(new MaterialCheckBoxCell()) {
 					@Override
 					public Boolean getValue(AvisDTO object) {
-						boolean value = selectionModel.isSelected(object);	
+						boolean value = selectionModel.isSelected(object);						
 						return value;
 					}
 				};
@@ -143,23 +153,26 @@ public class AvisDataGrid extends Composite {
             @Override
             public void update(int index, AvisDTO object, Boolean value) {
                 selectionModel.setSelected(object, value);
-                id = +object.getId();
-                
+                id = object.getId();
+                avisDtoSelected = object;
+               // MaterialToast.alert("id1"+id);
             	if (alID.contains(id)== true) {
             		alID.remove(id);
             		nbreSelection -=1;
-                    MaterialToast.alert(""+(nbreSelection));
-                    MaterialToast.alert("remove");
+            		
+//                    MaterialToast.alert("remove");
 				}
             	else {
 					alID.add(id);
 					nbreSelection +=1;
-					MaterialToast.alert(""+(nbreSelection));
-                    MaterialToast.alert("ajoute");
+//					MaterialToast.alert(""+(nbreSelection));
+//                    MaterialToast.alert("ajoute");
 					
 				}
+            	// MaterialToast.alert("index"+index+"objet"+object+"value"+value);
+            	
             }
-            
+           
         };
         checkColumn.setFieldUpdater(checkColumnFU);
 
@@ -167,8 +180,8 @@ public class AvisDataGrid extends Composite {
  		final TextColumn<AvisDTO> colTitre = new TextColumn<AvisDTO>() {
  			@Override
  			public String getValue(AvisDTO object) {
- 				if (object.getTitre() != null) {
- 					return object.getTitre();
+ 				if (object.getNom() != null) {
+ 					return object.getNom();
 				}
  				return "";
  			}
@@ -179,7 +192,7 @@ public class AvisDataGrid extends Composite {
  			@Override
  			public int compare(AvisDTO o1, AvisDTO o2) {
 
- 				return o1.getTitre().compareTo(o2.getTitre());
+ 				return o1.getNom().compareTo(o2.getNom());
  			}
  		});
  		
@@ -252,6 +265,7 @@ public class AvisDataGrid extends Composite {
 				if (object.getQuotidien() != null) {
 					if (object.getQuotidien().getName() != null) {
 						return object.getQuotidien().getName();
+						
 					}
 					
 				}
@@ -321,12 +335,12 @@ public class AvisDataGrid extends Composite {
 		
 		
 		/*//recuperation des valeurs saisies
-				String titreS = titre.getSelectedValue();
+				String titreS = nom.getSelectedValue();
 				String structureS = structure.getValue();			
 				String nomImg= fichierimage.getFilename();
 				String resumeS = resume.getText().toUpperCase();
-				String typeC = type.getSelectedValue();
-				int indextypeAO = type.getSelectedIndex();
+				String typeC = typeQuot.getSelectedValue();
+				int indextypeAO = typeQuot.getSelectedIndex();
 				*/
 				
 		//controle de saisie
@@ -354,12 +368,12 @@ public class AvisDataGrid extends Composite {
 				
 }
 
-	public AvisDTO getOrderDTO() {
-		return OrderDTO;
+	public AvisDTO getAvisDtoSelected() {
+		return avisDtoSelected;
 	}
 
-	public void setOrderDTO(AvisDTO OrderDTO) {
-		this.OrderDTO = OrderDTO;
+	public void setAvisDtoSelected(AvisDTO OrderDTO) {
+		this.avisDtoSelected = OrderDTO;
 	}
 //	popup pour enrigistrer un avis
 	@UiHandler("avisForm")
@@ -370,27 +384,44 @@ public class AvisDataGrid extends Composite {
 	@UiHandler("modifier")
 	 void onAvisModify(ClickEvent e) {
 		if (nbreSelection == 1) {
+			
 //			mettre les requetes pour recuperer les données et les mettre dans les champs
-			MaterialModal.showWindow(new AvisFormDataGrid(), ModalType.WINDOW, "Modifier un Avis","blue",false);
+			MaterialModal.showWindow(new AvisFormDataGrid(avisDtoSelected, this), ModalType.WINDOW, "Modifier un Avis","blue",false);
 		}
-		MaterialToast.alert("veuillez selectionner un seuk Avis");
+		else {
+			MaterialToast.alert("veuillez selectionner un seul Avis");
+		}
+		
 	}
 //	Ajouter mot cle
 	@UiHandler("mots_cles")
 	void onAddKeyWord(ClickEvent e){
 		if (nbreSelection == 1) {
 			MaterialModal.showWindow(new MotsClesDataGrid(), ModalType.WINDOW, "Ajout mots cles","blue",false);
+			nbreSelection --;
+		
+			
 		}
-			MaterialToast.alert("veuillez selectionner un seuk Avis");
+		else {
+			MaterialToast.alert("veuillez selectionner un seul Avis");
+		}
+			
 		
 	}
 //	supprimer un Avis
 	@UiHandler("supprimer")
 	void onAvisDelete(ClickEvent e){
-//		mettre le requete pour supprimer l'avis de Id id recuperer dans le checkBox
-		MaterialToast.alert("Suppression");
-	}
+		if (nbreSelection == 1){
+			
+			AvisDTO.delete(avisDtoSelected, this);
+			nbreSelection --;
+		}	
+		else{
+			MaterialToast.alert("Vous ne pouvez supprimer qu'un seul avis à la fois");
+			return;
+		}
 
+	}
 	public String getSortOrder() {
 		return sortOrder;
 	}

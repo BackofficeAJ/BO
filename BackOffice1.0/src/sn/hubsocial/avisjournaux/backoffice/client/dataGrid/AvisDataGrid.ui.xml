@@ -26,6 +26,7 @@
 		
 		header {
 		padding-left: 500px;
+		
 
 	} 
 	</ui:style>
@@ -39,7 +40,11 @@
 			.material-icons{
 			vertical-align: middle;
 			margin-right: 10px;
-		}
+			}
+			.dropdown-content {
+			    right: 25px;
+			    top: 55px;
+			}
 		</style>
 		
 		<m:MaterialRow addStyleNames="card">		

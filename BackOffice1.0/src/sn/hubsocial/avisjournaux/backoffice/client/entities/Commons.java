@@ -13,13 +13,12 @@ import org.apache.commons.io.IOUtils;
 
 public class Commons {
 //----------------------------------------TITRES----------------------------------------//
-	//public static final String ASKANE_SERVER = "http://askaneservertest.appspot.com";
+	public static final String ASKANE_SERVER = "http://askaneservertest.appspot.com";
 	//public static final String ASKANE_SERVER = "http://localhost:8870";
 	//public static final String AvisJournaux = "http://localhost:8000";
-	public static final String ASKANE_SERVER = "http://askaneserver.appspot.com";
+	//public static final String ASKANE_SERVER = "http://askaneserver.appspot.com";
 	public static final String HTTP_REST_ENTITY = ASKANE_SERVER+"/rest/entity";
-	public static final String HTTP_REST_APPLICATION = ASKANE_SERVER+"/rest/application";
-	
+	public static final String HTTP_REST_APPLICATION = ASKANE_SERVER+"/rest/application";	
 	public static final String HTTP_REST_ZONE = ASKANE_SERVER+"/rest/zone";
 	public static final String HTTP_REST_CATEGORY = ASKANE_SERVER+"/rest/category";
 	public static final String HTTP_REST_PRODUCT = ASKANE_SERVER + "/rest/product";
