@@ -54,7 +54,7 @@ public class AvisDataGrid extends Composite {
 
 	private List<AvisDTO> orders = new ArrayList<AvisDTO>();
 	
-	private int page = 0;
+	private int page = 3;
 	private int offset = 10;
 	private String sortOrder = "desc";
 	public int getPage() {
@@ -385,7 +385,7 @@ public class AvisDataGrid extends Composite {
 	 void onAvisModify(ClickEvent e) {
 		if (nbreSelection == 1) {
 			
-//			mettre les requetes pour recuperer les données et les mettre dans les champs
+//			mettre les requetes pour recuperer les donnÃ©es et les mettre dans les champs
 			MaterialModal.showWindow(new AvisFormDataGrid(avisDtoSelected, this), ModalType.WINDOW, "Modifier un Avis","blue",false);
 		}
 		else {
@@ -417,7 +417,7 @@ public class AvisDataGrid extends Composite {
 			nbreSelection --;
 		}	
 		else{
-			MaterialToast.alert("Vous ne pouvez supprimer qu'un seul avis à la fois");
+			MaterialToast.alert("Vous ne pouvez supprimer qu'un seul avis Ã  la fois");
 			return;
 		}
 
