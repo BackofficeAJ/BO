@@ -165,7 +165,9 @@ public class AvisFormDataGrid extends Composite {
 		
 		for(Organisation obj : QuotidienDTO.listOrganistion){
 			if (obj.getName() == quotidienSelected_0) {
-				avis.setOrganisationId(obj.getId());
+				if (obj.getId() != null) {
+					avis.setOrganisationId(obj.getId());
+				}				
 				avis.setOrganisation(obj);
 			}
 		}

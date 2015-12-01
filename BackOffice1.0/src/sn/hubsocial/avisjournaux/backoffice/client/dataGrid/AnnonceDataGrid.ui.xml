@@ -57,7 +57,7 @@
 			        <m:MaterialLink ui:field="modifier" fontSize="0.7" text="Modifier " textColor="black" waves="default" icon="mode_edit" size="small" separator="true"/>
 			        <m:MaterialLink ui:field="supprimer" fontSize="0.7" text="Supprimer " textColor="black" waves="default" icon="delete" size="small" separator="true"/>
 			    </m:MaterialDropDown>
-		        <m:MaterialIcon ui:field="" tooltip="" icon="add_circle" waves="default" textColor="red" size="small" addStyleNames="{style.menuItems} right"/>
+		        <m:MaterialIcon ui:field="quotidienForm" tooltip="Ajouter Quotidien" icon="add_circle" waves="default" textColor="red" size="small" addStyleNames="{style.menuItems} right"/>
 		        <m:MaterialTextBox placeholder="Search" addStyleNames="right"/>
 		        <m:MaterialIcon tooltip="Rechercher" waves="default" icon="search" size="small" addStyleNames="{style.menuItems} right" />  
 		     </m:MaterialRow>

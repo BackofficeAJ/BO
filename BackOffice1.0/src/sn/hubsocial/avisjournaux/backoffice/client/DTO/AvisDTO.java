@@ -218,8 +218,11 @@ public class AvisDTO implements Serializable {
 				// TODO Auto-generated method stub
 				avisDataGrid.getOrderDTOProvider().setList(new ArrayList<AvisDTO>());
 			      for (Objet obj : response){
-			    	  AvisDTO avisDTO = new AvisDTO(obj);
-			    	  avisDataGrid.getOrderDTOProvider().getList().add(avisDTO);
+			    	  if (obj != null) {
+			    		  AvisDTO avisDTO = new AvisDTO(obj);
+				    	  avisDataGrid.getOrderDTOProvider().getList().add(avisDTO);
+					}
+			    	  
 			      }
 			      
 			      avisDataGrid.getSortDataHandler().setList(avisDataGrid.getOrderDTOProvider().getList());
